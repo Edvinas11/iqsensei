@@ -1,27 +1,32 @@
 import styles from './style';
 import { Navbar, Hero } from './components';
 import Records from './records.json';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const apiUrl = 'http://127.0.0.1:8000/users/'
+let displayData
 
-async function pullJson() {
-  const response = await fetch(apiUrl)
-  const responseData = await response.json()
-  console.log(responseData)
-}
+const App = () => {
+  const [users, setUsers] = useState([])
 
-// function pullJson() {
-//   fetch(apiUrl)
-//   .then(response => response.json())
-//   .then(responseData => {
-//     console.log(responseData)
-//   }
-//   // return
-// }
+  async function pullJson() {
+    const response = await fetch(apiUrl)
+    const responseData = await response.json()
+    displayData = responseData.map(function(data) {
+      return(
+        <p key={data.id}>{data.name} {data.age} </p>
+      )
+    })
+    console.log(responseData)
+    setUsers(displayData)
+  }
 
-const App = () => (
-  <div className='bg-primary w-full overflow-hidden'>
+  useEffect(() => {
+    pullJson()
+  },[])
+
+  return (
+    <div className='bg-primary w-full overflow-hidden'>
     <div className={`${styles.paddingX} ${styles.flexCenter}`}>
       <div className={`${styles.boxWidth}`}>
         <Navbar />
@@ -36,31 +41,13 @@ const App = () => (
 
     <div className={`bg-primary ${styles.flexStart}`}>
       <div className={`${styles.boxWidth}`}> 
-
-      {
-        useEffect(() => {
-          pullJson()
-        },[])
-      }
-
-
-      {/* {
-        Records.map(record => {
-          return(
-            <div key={ record.id }>
-              { record.name } <br/>
-              { record.password } <br/>
-              { record.age } <br/>
-              { record.created } <br/>
-              <br/>
-            </div>
-          )
-        })
-      } */}
+        {users}
       </div>
     </div>
 
   </div>
-)
+  )
+}
 
 export default App
+
