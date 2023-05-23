@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Jonas Batonas",
+    "password": "batonas123",
+    "age": 12,
+    "created": "2023-05-23"
+  },
+  {
+    "id": 2,
+    "name": "Petras Desra",
+    "password": "desra123",
+    "age": 13,
+    "created": "2023-05-23"
+  },
+  {
+    "id": 3,
+    "name": "Paulius Sviestas",
+    "password": "sviestas123",
+    "age": 14,
+    "created": "2023-05-23"
+  }
+]
