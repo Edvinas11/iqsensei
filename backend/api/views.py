@@ -22,6 +22,13 @@ class CreateUserView(APIView):
             password = serializer.data.get("password")
             age = serializer.data.get("age")
             
+            
+            all_users = User.objects.all()
+            for usr in all_users:
+                if usr.name == name:
+                    return Response({"error": "Account with this name already exists."}, status=status.HTTP_400_BAD_REQUEST)
+            
+            
             newUser = User(name=name, password=password, age=age)
             newUser.save()
             return Response(UserSerializer(newUser).data, status=status.HTTP_200_OK)
