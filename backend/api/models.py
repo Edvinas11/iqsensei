@@ -1,7 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class User(models.Model):
-    name = models.CharField(max_length=20)
-    password = models.CharField(max_length=36)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
     age = models.IntegerField()
     created = models.DateField(auto_now_add=True)
+
+
