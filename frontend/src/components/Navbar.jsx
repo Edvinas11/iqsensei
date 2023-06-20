@@ -1,4 +1,4 @@
-import { navLinks } from '../constants';
+import { navLinks, themeColors } from '../constants';
 import { logo, menu, close } from '../assets';
 import { useState } from 'react';
 import Button from './Button';
@@ -13,30 +13,33 @@ const Navbar = () => {
 
       <ul className='list-none sm:flex hidden justify-end items-center flex-1'>
         {navLinks.map((nav, index) => (
-          <li key={nav.id} className={`font-poppins font-normal font-pointer text-[16px] ${index === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-black`}>
-            {/* <a href={`/${nav.id}`}>{nav.title}</a> */}
+          <li key={nav.id} className={`font-poppins font-normal font-pointer text-[16px] mr-10 text-black`}>
             <Link to={`/${nav.id}`}>{nav.title}</Link>
           </li>
         ))}
       </ul>
-
-      <Button styles={`ml-10 sm:flex hidden bg-purple-gradient text-primary `} text={`Sign Up`} />
+      
+      <form action="login">
+        <Button type="submit" color="white" bgColor="#8c52ff" text="Log In" borderRadius="10px" styles={`sm:flex hidden`} />
+      </form>
+      
 
       <div className='sm:hidden flex flex-1 justify-end items-center'>
           <img src={toogle ? close : menu} alt="menu" className='w-[28px] h-[28px] object-contain' onClick={() => setToogle((prev) => !prev)}/>
-          <div className={`${toogle ? 'flex' : 'hidden'} p-6 bg-purple-gradient absolute top-20 right-0 mx-4 my-2 min-w[140px] rounded-xl sidebar`}>
+          <div className={`${toogle ? 'flex' : 'hidden'} p-6 bg-purple absolute top-20 right-0 mx-4 my-2 min-w[140px] rounded-xl sidebar`}>
             <ul className='list-none flex flex-col justify-end items-center flex-1'>
               {navLinks.map((nav, index) => (
-                <li key={nav.id} className={`font-poppins font-normal font-pointer text-[16px] ${index === navLinks.length - 1 ? 'mr-0' : 'mb-4'} text-white`}>
+                <li key={nav.id} className={`font-poppins font-normal font-pointer text-[16px] mb-4 text-white`}>
                   <a href={`#${nav.id}`}>{nav.title}</a>
                 </li>
               ))}
 
-              <Button styles={`mt-4 bg-white text-secondary`} text={`Sign Up`} />
+              <form action="login">
+                <Button type="submit" color="#8c52ff" bgColor="white" text="Log In" borderRadius="10px" />
+              </form>
             </ul>
           </div>
       </div>
-
     </nav>
   )
 }

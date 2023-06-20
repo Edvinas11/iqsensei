@@ -34,12 +34,8 @@
   text-fill-color: transparent;
 }
 
-.bg-purple-gradient {
-  background: linear-gradient(
-    144.39deg,
-    #8c52ff -50.56%,
-    #81b1fa 150.61%
-  );
+.bg-purple {
+  background: #8c52ff
 }
 
 .bg-white {
