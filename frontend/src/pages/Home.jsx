@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../style";
-import { Navbar, Hero } from "../components";
+import { Navbar } from "../components";
+import { connect } from "react-redux";
 
 const Home = () => {
   return (
@@ -14,4 +15,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default connect(null, {})(Home);
