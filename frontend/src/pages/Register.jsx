@@ -3,7 +3,7 @@ import { logo } from "../assets";
 import Button from "../components/Button";
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const Register = () => {
   return (
     <div className={`w-full min-h-full flex items-start`}>
       <div className="relative w-[100%] h-full flex flex-col md:w-1/2">
@@ -15,9 +15,9 @@ const Login = () => {
 
           <div className="w-full flex flex-col max-w-[500px]">
             <div className="w-full flex flex-col mb-2">
-              <h1 className="text-3xl font-semibold mb-2">Login</h1>
+              <h1 className="text-3xl font-semibold mb-2">Registration</h1>
               <p className="text-base mb-2">
-                Welcome Back! Please enter your credentials.
+                Create an account.
               </p>
             </div>
 
@@ -32,12 +32,11 @@ const Login = () => {
                 type="password"
                 placeholder="Password"
               />
-            </div>
-
-            <div className="w-full flex justify-between mt-2">
-              <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">
-                Forgot password?
-              </p>
+              <input
+                className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
+                type="password"
+                placeholder="Repeat password"
+              />
             </div>
 
             <div className="w-full flex flex-col my-4">
@@ -45,7 +44,7 @@ const Login = () => {
                 type="submit"
                 color="white"
                 bgColor="#8c52ff"
-                text="Log In"
+                text="Register"
                 borderRadius="10px"
                 styles={`p-4 my-2`}
               />
@@ -54,9 +53,9 @@ const Login = () => {
 
           <div className="w-full flex items-center justify-center">
             <p className="text-sm font-normal text-black">
-              Don't have an account?{" "}
-              <Link to="/register" className="font-semibold underline underline-offset-2 cursor-pointer">
-                Sign up for free
+              Already have an account?{" "}
+              <Link to="/login" className="font-semibold underline underline-offset-2 cursor-pointer">
+                Log in
               </Link>
             </p>
           </div>
@@ -77,4 +76,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

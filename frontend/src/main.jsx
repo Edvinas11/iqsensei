@@ -1,14 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import './index.css'
-import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
-import { Dashboard, Courses, Login, Shop } from './pages';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Dashboard, Courses, Login, Shop, Register, Home } from './pages';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Home />,
   },
   {
     path: "dashboard",
@@ -26,11 +25,14 @@ const router = createBrowserRouter([
     path: "shop",
     element: <Shop />,
   },
+  {
+    path: "register",
+    element: <Register />,
+  },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/* <App /> */}
     <RouterProvider router={router}/>
   </React.StrictMode>,
 )
