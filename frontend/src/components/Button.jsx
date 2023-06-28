@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Button = ({ styles }) => {
+const Button = ({ bgColor, color, size, text, borderRadius, styles, type }) => {
   return (
-    <button type='button' className={`py-4 px-6 bg-blue-gradient font-poppins font-medium text-[18px] text-primary rounded-lg outline-none  ${styles}`}>
-      Get Started
+    <button type={type} style={{ backgroundColor: bgColor, color, borderRadius }} className={`text-${size} font-semibold p-3 hover:drop-shadow-xl ${styles}`}>
+      {text}
     </button>
   )
 }
