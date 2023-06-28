@@ -2,6 +2,7 @@ import React from "react";
 import { logo } from "../assets";
 import Button from "../components/Button";
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
 
 const Login = () => {
   return (
@@ -22,6 +23,11 @@ const Login = () => {
             </div>
 
             <div className="w-full flex flex-col">
+              <input
+                className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
+                type="text"
+                placeholder="Username"
+              />
               <input
                 className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
                 type="email"
@@ -77,4 +83,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default connect(null, {})(Login);
