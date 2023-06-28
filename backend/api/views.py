@@ -1,42 +1,51 @@
-from rest_framework import generics, status
+from django.contrib.auth import get_user_model, login, logout
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.contrib.auth.models import User
-from api.serializers import CreateUserSerializer, UserDisplay
-from .models import UserProfile
-
-class UserListView(generics.ListAPIView):
-    queryset = UserProfile.objects.all()
-    serializer_class = UserDisplay
+from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
+from rest_framework import permissions, status
+from .validations import custom_validation, validate_email, validate_password
 
 
-class CreateUserView(APIView):
-    serializer_class = CreateUserSerializer
-    
-    def post(self, request, format=None):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            print(serializer.data)
-            name = serializer.data.get("user")['username']
-            password = serializer.data.get("user")['password']
-            email = serializer.data.get("user")['email']
-            age = serializer.data.get("profile")['age']
-            
-            user = User(username=name, email=email)
-            user.set_password(password)
-            user.save()
-            
-            
-            all_users = UserProfile.objects.all()
-            for usr in all_users:
-                if usr.user.username == name:
-                    return Response({"error": "Account with this name already exists."}, status=status.HTTP_400_BAD_REQUEST)
-            
-            
-            profile = UserProfile(user=user, age=age)
-            profile.save()
-            return Response(UserDisplay(profile).data, status=status.HTTP_200_OK)
-        
-        response_data = {'status': 'error', 'errors': serializer.errors}
-        return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+class UserRegister(APIView):
+	permission_classes = (permissions.AllowAny,)
+	def post(self, request):
+		clean_data = custom_validation(request.data)
+		serializer = UserRegisterSerializer(data=clean_data)
+		if serializer.is_valid(raise_exception=True):
+			user = serializer.create(clean_data)
+			if user:
+				return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
+class UserLogin(APIView):
+	permission_classes = (permissions.AllowAny,)
+	authentication_classes = (SessionAuthentication,)
+	##
+	def post(self, request):
+		data = request.data
+		assert validate_email(data)
+		assert validate_password(data)
+		serializer = UserLoginSerializer(data=data)
+		if serializer.is_valid(raise_exception=True):
+			user = serializer.check_user(data)
+			login(request, user)
+			return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class UserLogout(APIView):
+	permission_classes = (permissions.AllowAny,)
+	authentication_classes = ()
+	def post(self, request):
+		logout(request)
+		return Response(status=status.HTTP_200_OK)
+
+
+class UserView(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (SessionAuthentication,)
+	##
+	def get(self, request):
+		serializer = UserSerializer(request.user)
+		return Response({'user': serializer.data}, status=status.HTTP_200_OK)
