@@ -3,8 +3,9 @@ import { logo } from "../assets";
 import Button from "../components/Button";
 import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
+import { register } from "../actions/auth";
 
-const Register = ({ isAuthenticated }) => {
+const Register = ({ isAuthenticated, register }) => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -23,7 +24,7 @@ const Register = ({ isAuthenticated }) => {
     e.preventDefault();
 
     if (password === re_password) {
-      // TODO: register user
+      register(username, password, email);
       setAccountCreated(true);
     }
   };
@@ -54,6 +55,8 @@ const Register = ({ isAuthenticated }) => {
                   placeholder="Username"
                   onChange={(e) => onChange(e)}
                   required
+                  name="username"
+                  value={username}
                 />
                 <input
                   className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
@@ -61,22 +64,28 @@ const Register = ({ isAuthenticated }) => {
                   placeholder="Email"
                   onChange={(e) => onChange(e)}
                   required
+                  value={email}
+                  name="email"
                 />
                 <input
                   className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
                   type="password"
                   placeholder="Password"
                   onChange={(e) => onChange(e)}
-                  minLength="8"
+                  minLength="6"
                   required
+                  name="password"
+                  value={password}
                 />
                 <input
                   className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
                   type="password"
                   placeholder="Repeat password"
                   onChange={(e) => onChange(e)}
-                  minLength="8"
+                  minLength="6"
                   required
+                  name="re_password"
+                  value={re_password}
                 />
               </div>
 
@@ -125,4 +134,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, {})(Register);
+export default connect(mapStateToProps, { register })(Register);
