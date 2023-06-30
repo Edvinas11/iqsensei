@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { logo } from "../assets";
 import Button from "../components/Button";
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
+import { isValidEmail } from "../actions/valid";
+import { login } from "../actions/auth";
+// import CSRFToken from "../components/CSRFToken";
 
-const Login = () => {
+const Login = ({ isAuthenticated, login }) => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = formData;
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if(isValidEmail(email)){
+      login(email, password);
+    }
+  };
+
+  if (isAuthenticated) return <Navigate to="/dashboard" />;
+
   return (
     <div className={`w-full min-h-full flex items-start`}>
       <div className="relative w-[100%] h-full flex flex-col md:w-1/2">
@@ -22,46 +45,57 @@ const Login = () => {
               </p>
             </div>
 
-            <div className="w-full flex flex-col">
-              <input
-                className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
-                type="text"
-                placeholder="Username"
-              />
-              <input
-                className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
-                type="email"
-                placeholder="Email"
-              />
-              <input
-                className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
-                type="password"
-                placeholder="Password"
-              />
-            </div>
+            <form onSubmit={e => onSubmit(e)}>
+              {/* <CSRFToken /> */}
+              <div className="w-full flex flex-col">
+                <input
+                  className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
+                  type="email"
+                  placeholder="Email"
+                  autoComplete="off"
+                  onChange={(e) => onChange(e)}
+                  name="email"
+                  value={email == null ? "" : email}
+                  required
+                />
+                <input
+                  className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
+                  type="password"
+                  placeholder="Password"
+                  autoComplete="off"
+                  onChange={(e) => onChange(e)}
+                  name="password"
+                  value={password == null ? "": password}
+                  required
+                />
+              </div>
 
-            <div className="w-full flex justify-between mt-2">
-              <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">
-                Forgot password?
-              </p>
-            </div>
+              {/* <div className="w-full flex justify-between mt-2">
+                <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">
+                  Forgot password?
+                </p>
+              </div> */}
 
-            <div className="w-full flex flex-col my-4">
-              <Button
-                type="submit"
-                color="white"
-                bgColor="#8c52ff"
-                text="Log In"
-                borderRadius="10px"
-                styles={`p-4 my-2`}
-              />
-            </div>
+              <div className="w-full flex flex-col my-4">
+                <Button
+                  type="submit"
+                  color="white"
+                  bgColor="#8c52ff"
+                  text="Log In"
+                  borderRadius="10px"
+                  styles={`p-4 my-2`}
+                />
+              </div>
+            </form>
           </div>
 
           <div className="w-full flex items-center justify-center">
             <p className="text-sm font-normal text-black">
               Don't have an account?{" "}
-              <Link to="/register" className="font-semibold underline underline-offset-2 cursor-pointer">
+              <Link
+                to="/register"
+                className="font-semibold underline underline-offset-2 cursor-pointer"
+              >
                 Sign up for free
               </Link>
             </p>
@@ -83,4 +117,8 @@ const Login = () => {
   );
 };
 
-export default connect(null, {})(Login);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { login })(Login);

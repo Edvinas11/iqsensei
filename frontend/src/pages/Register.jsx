@@ -4,6 +4,8 @@ import Button from "../components/Button";
 import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { register } from "../actions/auth";
+import { isValidEmail } from "../actions/valid";
+// import CSRFToken from "../components/CSRFToken";
 
 const Register = ({ isAuthenticated, register }) => {
   const [formData, setFormData] = useState({
@@ -20,17 +22,25 @@ const Register = ({ isAuthenticated, register }) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (password === re_password) {
-      register(username, password, email);
-      setAccountCreated(true);
+    // TODO: Check if email is valid. Regex pattern
+    if (password === re_password && isValidEmail(email)) {
+      try {
+        register(username, password, email);
+        setAccountCreated(true);
+      } catch (error) {
+        // TODO. Display a message
+        console.error(error);
+        setAccountCreated(false);
+      }
+      
     }
   };
 
   if (isAuthenticated) return <Navigate to="/dashboard" />
-  else if (accountCreated) return <Navigate to="/login" />
+  if (accountCreated) return <Navigate to="/login" />
 
   return (
     <div className={`w-full min-h-full flex items-start`}>
@@ -48,6 +58,7 @@ const Register = ({ isAuthenticated, register }) => {
             </div>
 
             <form onSubmit={e => onSubmit(e)}>
+              {/* <CSRFToken /> */}
               <div className="w-full flex flex-col">
                 <input
                   className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
@@ -57,6 +68,7 @@ const Register = ({ isAuthenticated, register }) => {
                   required
                   name="username"
                   value={username}
+                  autoComplete="off"
                 />
                 <input
                   className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
@@ -66,6 +78,7 @@ const Register = ({ isAuthenticated, register }) => {
                   required
                   value={email}
                   name="email"
+                  autoComplete="off"
                 />
                 <input
                   className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
@@ -76,6 +89,7 @@ const Register = ({ isAuthenticated, register }) => {
                   required
                   name="password"
                   value={password}
+                  autoComplete="off"
                 />
                 <input
                   className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
@@ -86,6 +100,7 @@ const Register = ({ isAuthenticated, register }) => {
                   required
                   name="re_password"
                   value={re_password}
+                  autoComplete="off"
                 />
               </div>
 
