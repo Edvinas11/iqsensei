@@ -1,10 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Dashboard, Courses, Login, Shop, Register, Home } from './pages';
-import { Provider } from 'react-redux';
-import store from './store';
+import PrivateRoute from "./hocs/PrivateRoute";
+import { Dashboard, Courses, Login, Shop, Register, Home } from "./pages";
+import { Provider } from "react-redux";
+import store from "./store";
+import { checkAuthenticated } from "./actions/auth";
 
 const router = createBrowserRouter([
   {
@@ -13,11 +15,11 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard />,
+    element: <PrivateRoute component={Dashboard}/>,
   },
   {
     path: "courses",
-    element: <Courses />,
+    element: <PrivateRoute component={Courses}/>,
   },
   {
     path: "login",
@@ -25,18 +27,21 @@ const router = createBrowserRouter([
   },
   {
     path: "shop",
-    element: <Shop />,
+    element: <PrivateRoute component={Shop}/>,
   },
   {
     path: "register",
     element: <Register />,
   },
-])
+]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+// Check if the user is authenticated before rendering the app
+store.dispatch(checkAuthenticated());
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </Provider>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
