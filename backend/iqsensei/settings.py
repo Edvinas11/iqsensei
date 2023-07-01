@@ -25,12 +25,13 @@ SECRET_KEY = 'django-insecure-*l)pvh+3ug*vh5cd)eqj4w95zul%2-5q(g+if^@3zeb9e0llzw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
-    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -95,8 +95,6 @@ REST_FRAMEWORK = {
     ),
 }
 
-CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1', 'http://127.0.0.1:8000', 'http://localhost:5173']
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -139,8 +137,28 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_ALLOW_ALL = False
-
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8000',
-    'http://localhost:5173',
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173'
+]
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:5173',  
+    'http://127.0.0.1:8000/'
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
 )
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:5173',  
+    'http://127.0.0.1:8000/'
+]
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = False
+
+SESSION_COOKIE_SECURE = True
