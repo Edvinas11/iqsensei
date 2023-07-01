@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
+
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 const CSRFToken = () => {
   const [csrftoken, setcsrftoken] = useState("");
@@ -22,9 +25,10 @@ const CSRFToken = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/csrf_token`, { withCredentials: true });
-        console.log(response.headers);
-      } catch (error) {}
+        await axios.get(`${import.meta.env.VITE_APP_API_URL}/api/csrf_cookie`, {
+          withCredentials: true,
+        });
+      } catch (err) {}
     };
 
     fetchData();

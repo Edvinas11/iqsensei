@@ -5,7 +5,6 @@ import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { register } from "../actions/auth";
 import { isValidEmail } from "../actions/valid";
-// import CSRFToken from "../components/CSRFToken";
 
 const Register = ({ isAuthenticated, register }) => {
   const [formData, setFormData] = useState({
@@ -58,7 +57,6 @@ const Register = ({ isAuthenticated, register }) => {
             </div>
 
             <form onSubmit={e => onSubmit(e)}>
-              {/* <CSRFToken /> */}
               <div className="w-full flex flex-col">
                 <input
                   className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"

@@ -7,7 +7,8 @@ export const checkAuthenticated = () => async dispatch => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-        }
+        },
+        withCredentials: true,
     };
 
     try {
@@ -36,8 +37,10 @@ export const register = (username, password, email) => async dispatch => {
     const config = {
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+            'X-CSRFToken': Cookies.get('csrftoken')
+        },
+        withCredentials: true,
     };
 
     const body = JSON.stringify({ username, password, email });
@@ -65,8 +68,10 @@ export const login = (email, password) => async dispatch => {
     const config = {
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+            'X-CSRFToken': Cookies.get('csrftoken')
+        },
+        withCredentials: true,
     };
 
     const body = JSON.stringify({ email, password });
