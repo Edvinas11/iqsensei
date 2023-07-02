@@ -64,33 +64,43 @@ export const register = (username, password, email) => async dispatch => {
     }
 }
 
-export const login = (email, password) => async dispatch => {
-    const config = {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'X-CSRFToken': Cookies.get('csrftoken')
-        },
-        withCredentials: true,
+export const login = (username, password) => async dispatch => {
+    console.log("asdasdasd");
+    const user = {
+        email: username,
+        password: password
     };
 
-    const body = JSON.stringify({ email, password });
-
     try {
-        const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/login`, body, config);
-
-        if(response.status === 200){
-            dispatch({
-                type: LOGIN_SUCCESS
-            });
-        } else {
-            dispatch({
-                type: LOGIN_FAIL
-            });
+        const response = await axios.post(
+        'http://localhost:8000/api/token',
+        user,
+        {
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            withCredentials: true
         }
-    } catch (error) {
-        dispatch({
-            type: LOGIN_FAIL
+        );
+        console.log(response.data);
+        // Store the access and refresh tokens in cookies
+        Cookies.set('access_token', response.data.access, {
+        secure: true,
+        httpOnly: true,
+        sameSite: 'strict'
         });
+    
+        Cookies.set('refresh_token', response.data.refresh, {
+        secure: true,
+        httpOnly: true,
+        sameSite: 'strict'
+        });
+    
+        // Set the Authorization header for future API requests
+        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.access}`;
+    
+    } catch (error) {
+        // Handle the error
+        console.error(error);
     }
 }
