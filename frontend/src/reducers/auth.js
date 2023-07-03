@@ -33,7 +33,7 @@ export default function (state = initialState, action) {
         ...state,
         isAuthenticated: true,
       };
-    case LOGIN_SUCCESS:
+    case LOGOUT_SUCCESS:
         return {
             ...state,
             isAuthenticated: false,

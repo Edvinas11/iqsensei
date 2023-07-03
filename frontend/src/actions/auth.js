@@ -17,17 +17,29 @@ export const logout = () => async dispatch => {
       "Content-Type": "application/json",
     },
     withCredentials: true,
+    authorization: `Bearer ${sessionStorage.getItem('access_token')}`
   };
+
+  const body = JSON.stringify({ refresh_token: sessionStorage.getItem('refresh_token') });
 
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_APP_API_URL}/api/logout`,
+      body,
       config
     );
-    // TODO
+    if(response.status === 205){
+      sessionStorage.removeItem("access_token");
+      sessionStorage.removeItem("refresh_token");
 
+      dispatch({
+        type: LOGOUT_SUCCESS
+      });
+    }
   } catch (error) {
-    
+    dispatch({
+      type: LOGOUT_FAIL
+    });
   }
 }
 
