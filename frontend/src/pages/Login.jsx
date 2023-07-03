@@ -5,6 +5,7 @@ import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { isValidEmail } from "../actions/valid";
 import { login } from "../actions/auth";
+import styles from "../style";
 
 const Login = ({ isAuthenticated, login }) => {
   const [formData, setFormData] = useState({
@@ -37,17 +38,17 @@ const Login = ({ isAuthenticated, login }) => {
           </a>
 
           <div className="w-full flex flex-col max-w-[500px]">
-            <div className="w-full flex flex-col mb-2">
-              <h1 className="text-3xl font-semibold mb-2">Login</h1>
-              <p className="text-base mb-2">
+            <div className="w-full flex flex-col mb-6">
+              <h1 className="font-poppins font-semibold text-[52px] text-black ss:leading-[100.8px] leading-[75px] w-full mb-2">Login</h1>
+              <p className={`${styles.paragraph} text-base mb-2`}>
                 Welcome Back! Please enter your credentials.
               </p>
             </div>
 
             <form onSubmit={e => onSubmit(e)}>
-              <div className="w-full flex flex-col">
+              <div className="w-full flex flex-col mb-10">
                 <input
-                  className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
+                  className="w-full font-poppins text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
                   type="email"
                   placeholder="Email"
                   autoComplete="off"
@@ -57,7 +58,7 @@ const Login = ({ isAuthenticated, login }) => {
                   required
                 />
                 <input
-                  className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
+                  className="w-full font-poppins text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
                   type="password"
                   placeholder="Password"
                   autoComplete="off"
@@ -74,7 +75,7 @@ const Login = ({ isAuthenticated, login }) => {
                 </p>
               </div> */}
 
-              <div className="w-full flex flex-col my-4">
+              <div className="w-full flex flex-col">
                 <Button
                   type="submit"
                   color="white"
@@ -88,11 +89,11 @@ const Login = ({ isAuthenticated, login }) => {
           </div>
 
           <div className="w-full flex items-center justify-center">
-            <p className="text-sm font-normal text-black">
+            <p className="font-poppins first-line:text-sm font-normal text-black">
               Don't have an account?{" "}
               <Link
                 to="/register"
-                className="font-semibold underline underline-offset-2 cursor-pointer"
+                className="font-poppins font-semibold underline underline-offset-2 cursor-pointer"
               >
                 Sign up for free
               </Link>
@@ -103,10 +104,10 @@ const Login = ({ isAuthenticated, login }) => {
       {/* Second half */}
       <div className="bg-purple w-1/2 h-screen object-cover md:flex hidden">
         <div className="absolute top-[25%] right-[10%] left-[60%] flex flex-col">
-          <h1 className="text-3xl font-bold text-white my-4">
+          <h1 className="font-poppins font-semibold ss:text-[52px] text-[32px] ss:leading-[100.8px] leading-[75px] w-full text-white my-4">
             Join Us and Unlock a World of Possibilities.
           </h1>
-          <p className="text-xl text-white font-normal">
+          <p className={`${styles.paragraph} text-xl text-white font-normal`}>
             Start for free and get attractive offers from the community.
           </p>
         </div>
