@@ -5,6 +5,7 @@ import { Link, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { register } from "../actions/auth";
 import { isValidEmail } from "../actions/valid";
+import styles from "../style";
 
 const Register = ({ isAuthenticated, register }) => {
   const [formData, setFormData] = useState({
@@ -51,15 +52,15 @@ const Register = ({ isAuthenticated, register }) => {
           </a>
 
           <div className="w-full flex flex-col max-w-[500px]">
-            <div className="w-full flex flex-col mb-2">
-              <h1 className="text-3xl font-semibold mb-2">User Registration</h1>
-              <p className="text-base mb-2">Create an account.</p>
+            <div className="w-full flex flex-col mb-5">
+              <h1 className="font-poppins font-semibold text-[52px] text-black ss:leading-[100.8px] leading-[75px] w-full mb-2">User Registration</h1>
+              <p className={`${styles.paragraph} text-base mb-2`}>Create an account.</p>
             </div>
 
             <form onSubmit={e => onSubmit(e)}>
-              <div className="w-full flex flex-col">
+              <div className="w-full flex flex-col mb-10">
                 <input
-                  className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
+                  className="w-full font-poppins text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
                   type="text"
                   placeholder="Username"
                   onChange={(e) => onChange(e)}
@@ -69,7 +70,7 @@ const Register = ({ isAuthenticated, register }) => {
                   autoComplete="off"
                 />
                 <input
-                  className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
+                  className="w-full font-poppins text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
                   type="email"
                   placeholder="Email"
                   onChange={(e) => onChange(e)}
@@ -79,7 +80,7 @@ const Register = ({ isAuthenticated, register }) => {
                   autoComplete="off"
                 />
                 <input
-                  className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
+                  className="w-full font-poppins text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
                   type="password"
                   placeholder="Password"
                   onChange={(e) => onChange(e)}
@@ -90,7 +91,7 @@ const Register = ({ isAuthenticated, register }) => {
                   autoComplete="off"
                 />
                 <input
-                  className="w-full text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
+                  className="w-full font-poppins text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
                   type="password"
                   placeholder="Repeat password"
                   onChange={(e) => onChange(e)}
@@ -116,11 +117,11 @@ const Register = ({ isAuthenticated, register }) => {
           </div>
 
           <div className="w-full flex items-center justify-center">
-            <p className="text-sm font-normal text-black">
+            <p className="font-poppins first-line:text-sm font-normal text-black">
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="font-semibold underline underline-offset-2 cursor-pointer"
+                className="font-poppins font-semibold underline underline-offset-2 cursor-pointer"
               >
                 Log in
               </Link>
@@ -131,10 +132,10 @@ const Register = ({ isAuthenticated, register }) => {
       {/* Second half */}
       <div className="bg-purple w-1/2 h-screen object-cover md:flex hidden">
         <div className="absolute top-[25%] right-[10%] left-[60%] flex flex-col">
-          <h1 className="text-3xl font-bold text-white my-4">
+          <h1 className="font-poppins font-semibold ss:text-[52px] text-[32px] ss:leading-[100.8px] leading-[75px] w-full text-white my-4">
             Join Us and Unlock a World of Possibilities.
           </h1>
-          <p className="text-xl text-white font-normal">
+          <p className={`${styles.paragraph} text-xl text-white font-normal`}>
             Start for free and get attractive offers from the community.
           </p>
         </div>
