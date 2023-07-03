@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../style";
-import { Navbar } from "../components";
+import { Hero, Navbar } from "../components";
 import { connect } from "react-redux";
 
 const Home = () => {
@@ -11,6 +11,13 @@ const Home = () => {
           <Navbar />
         </div>
       </div>
+
+      <div className={`bg-primary ${styles.flexStart}`}>
+        <div className={`${styles.boxWidth}`}>
+          <Hero />
+        </div>
+      </div>
+
     </div>
   );
 };

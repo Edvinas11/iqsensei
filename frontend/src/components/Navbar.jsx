@@ -38,7 +38,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
           type="submit"
           color="#8c52ff"
           bgColor="white"
-          text="Get Started"
+          text="Sign Up"
           borderRadius="10px"
         />
       </form>
@@ -61,7 +61,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
             type="submit"
             color="white"
             bgColor="#8c52ff"
-            text="Get Started"
+            text="Sign Up"
             borderRadius="10px"
             styles={`md:flex hidden px-5`}
           />
