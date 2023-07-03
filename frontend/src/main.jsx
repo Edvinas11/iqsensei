@@ -36,7 +36,7 @@ const router = createBrowserRouter([
 ]);
 
 // Check if the user is authenticated before rendering the app
-// store.dispatch(checkAuthenticated());
+store.dispatch(checkAuthenticated());
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>

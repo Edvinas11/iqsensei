@@ -4,8 +4,9 @@ import React, { useState, Fragment } from "react";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { logout } from "../actions/auth";
 
-const Navbar = ({ isAuthenticated }) => {
+const Navbar = ({ isAuthenticated, logout }) => {
   const [toogle, setToogle] = useState(false);
 
   const authSidebarLinks = (
@@ -73,11 +74,16 @@ const Navbar = ({ isAuthenticated }) => {
       {authNavLinks.map((nav, index) => (
           <li
             key={nav.id}
-            className={`font-poppins font-normal font-pointer text-[16px] ${index === authNavLinks.length - 1 ? 'mr-0' : 'mr-10'} text-black`}
+            className={`font-poppins font-normal font-pointer text-[16px] mr-10 text-black`}
           >
             <Link to={`/${nav.id}`}>{nav.title}</Link>
           </li>
         ))}
+
+        <li className={`font-poppins font-normal font-pointer text-[16px] mr-0 text-black`}>
+          <Link to="#!" onClick={logout}>Logout</Link>
+        </li>
+
     </Fragment>
   )
 
@@ -114,4 +120,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, {})(Navbar);
+export default connect(mapStateToProps, {logout})(Navbar);

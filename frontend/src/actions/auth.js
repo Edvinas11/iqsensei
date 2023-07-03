@@ -6,40 +6,62 @@ import {
   LOGIN_FAIL,
   AUTHENTICATED_FAIL,
   AUTHENTICATED_SUCCESS,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL
 } from "./types";
-import Cookies from "js-cookie";
 
-export const checkAuthenticated = () => async (dispatch) => {
+export const logout = () => async dispatch => {
   const config = {
     headers: {
-      Accept: "application/json",
+      'Accept': 'application/json',
       "Content-Type": "application/json",
     },
     withCredentials: true,
   };
 
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_APP_API_URL}/api/authenticated`,
+    const response = await axios.post(
+      `${import.meta.env.VITE_APP_API_URL}/api/logout`,
+      config
+    );
+    // TODO
+
+  } catch (error) {
+    
+  }
+}
+
+export const checkAuthenticated = () => async (dispatch) => {
+  const config = {
+    headers: {
+      'Accept': 'application/json',
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+  }
+
+  const body = JSON.stringify({ refresh:sessionStorage.getItem("refresh_token") });
+
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_APP_API_URL}/api/token/refresh`,
+      body,
       config
     );
 
-    if (response.status === 200) {
+    if(response.status === 200){
+      sessionStorage.setItem("access_token", response.data.access);
+
       dispatch({
         type: AUTHENTICATED_SUCCESS,
-        payload: true,
-      });
-    } else {
-      dispatch({
-        type: AUTHENTICATED_FAIL,
-        payload: false,
-      });
+        payload: true
+      })
     }
   } catch (error) {
     dispatch({
       type: AUTHENTICATED_FAIL,
-      payload: false,
-    });
+      payload: false
+    })
   }
 };
 
@@ -47,8 +69,7 @@ export const register = (username, password, email) => async (dispatch) => {
   const config = {
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
-      "X-CSRFToken": Cookies.get("csrftoken"),
+      "Content-Type": "application/json"
     },
     withCredentials: true,
   };
@@ -63,6 +84,9 @@ export const register = (username, password, email) => async (dispatch) => {
     );
 
     if (response.status === 201) {
+      sessionStorage.setItem("access_token", response.data.access_token);
+      sessionStorage.setItem("refresh_token", response.data.refresh_token);
+
       dispatch({
         type: REGISTER_SUCCESS,
       });
@@ -90,14 +114,14 @@ export const login = (email, password) => async (dispatch) => {
 
   try {
     const response = await axios.post(
-      `${import.meta.env.VITE_APP_API_URL}/api/token`,
+      `${import.meta.env.VITE_APP_API_URL}/api/login`,
       body,
       config
     );
 
     if (response.status === 200) {
-      sessionStorage.setItem("access_token", response.data.access);
-      sessionStorage.setItem("refresh_token", response.data.refresh);
+      sessionStorage.setItem("access_token", response.data.access_token);
+      sessionStorage.setItem("refresh_token", response.data.refresh_token);
 
       // Set the Authorization header for future API requests
       axios.defaults.headers.common[
