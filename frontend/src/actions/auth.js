@@ -41,13 +41,8 @@ export const checkAuthenticated = () => async (dispatch) => {
       config
       );
 
-<<<<<<< HEAD
-    if(response.status === 200){
-      sessionStorage.setItem('access_token', response.data.access);
-=======
       if(response.status === 200){
         sessionStorage.setItem("access_token", response.data.access);
->>>>>>> ce2a62a2e6f749120e92ead9bff0ef356a5d6132
 
         dispatch({
           type: AUTHENTICATED_SUCCESS,
@@ -78,18 +73,6 @@ export const register = (username, password, email) => async (dispatch) => {
       `${import.meta.env.VITE_APP_API_URL}/api/register`,
       body,
       config
-<<<<<<< HEAD
-    );
-
-    if (response.status === 201) {
-      sessionStorage.setItem('access_token', response.data.access_token);
-      sessionStorage.setItem('refresh_token', response.data.refresh_token);
-
-      dispatch({
-        type: REGISTER_SUCCESS,
-      });
-    } else {
-=======
       );
       
       if (response.status === 201) {
@@ -105,27 +88,10 @@ export const register = (username, password, email) => async (dispatch) => {
         });
       }
     } catch (error) {
->>>>>>> ce2a62a2e6f749120e92ead9bff0ef356a5d6132
       dispatch({
         type: REGISTER_FAIL,
       });
     }
-<<<<<<< HEAD
-  } catch (error) {
-    dispatch({
-      type: REGISTER_FAIL,
-    });
-  }
-};
-
-export const login = (email, password) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    withCredentials: true,
-=======
->>>>>>> ce2a62a2e6f749120e92ead9bff0ef356a5d6132
   };
   
   export const login = (email, password) => async (dispatch) => {
@@ -143,18 +109,6 @@ export const login = (email, password) => async (dispatch) => {
       `${import.meta.env.VITE_APP_API_URL}/api/login`,
       body,
       config
-<<<<<<< HEAD
-    );
-
-    if (response.status === 200) {
-      sessionStorage.setItem('access_token', response.data.access_token);
-      sessionStorage.setItem('refresh_token', response.data.refresh_token);
-
-      // Set the Authorization header for future API requests
-      axios.defaults.headers.common[
-        'Authorization'
-      ] = `Bearer ${response.data.access}`;
-=======
       );
       
       if (response.status === 200) {
@@ -179,7 +133,6 @@ export const login = (email, password) => async (dispatch) => {
       console.error(error);
     }
   };
->>>>>>> ce2a62a2e6f749120e92ead9bff0ef356a5d6132
 
   export const logout = () => async dispatch => {
     const config = {

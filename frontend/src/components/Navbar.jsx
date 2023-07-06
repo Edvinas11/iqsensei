@@ -14,11 +14,15 @@ const Navbar = ({ isAuthenticated, logout }) => {
       {authNavLinks.map((nav, index) => (
         <li
           key={nav.id}
-          className={`font-poppins font-normal font-pointer text-[16px] ${index === authNavLinks.length - 1 ? 'mb-0' : 'mb-4'} text-white`}
+          className={`font-poppins font-normal font-pointer text-[16px] mb-4 text-white`}
         >
           <a href={`/${nav.id}`}>{nav.title}</a>
         </li>
       ))}
+
+      <li className={`font-poppins font-normal font-pointer text-[16px] mb-0 text-white`}>
+        <Link to="#!" onClick={logout}>Logout</Link>
+      </li>
     </Fragment>
   );
 
