@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -8,13 +8,25 @@ import {
   AUTHENTICATED_SUCCESS,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL
-} from "./types";
+} from './types';
+
+export const updateToken = () => async dispatch => {
+  const config = {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    withCredentials: true,
+  };
+
+  const body = JSON.stringify({ refresh_token: sessionStorage.getItem('refresh_token') });
+}
 
 export const logout = () => async dispatch => {
   const config = {
     headers: {
       'Accept': 'application/json',
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     withCredentials: true,
     authorization: `Bearer ${sessionStorage.getItem('access_token')}`
@@ -29,8 +41,8 @@ export const logout = () => async dispatch => {
       config
     );
     if(response.status === 205){
-      sessionStorage.removeItem("access_token");
-      sessionStorage.removeItem("refresh_token");
+      sessionStorage.removeItem('access_token');
+      sessionStorage.removeItem('refresh_token');
 
       dispatch({
         type: LOGOUT_SUCCESS
@@ -47,12 +59,12 @@ export const checkAuthenticated = () => async (dispatch) => {
   const config = {
     headers: {
       'Accept': 'application/json',
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     withCredentials: true,
   }
 
-  const body = JSON.stringify({ refresh:sessionStorage.getItem("refresh_token") });
+  const body = JSON.stringify({ refresh:sessionStorage.getItem('refresh_token') });
 
   try {
     const response = await axios.post(
@@ -62,7 +74,7 @@ export const checkAuthenticated = () => async (dispatch) => {
     );
 
     if(response.status === 200){
-      sessionStorage.setItem("access_token", response.data.access);
+      sessionStorage.setItem('access_token', response.data.access);
 
       dispatch({
         type: AUTHENTICATED_SUCCESS,
@@ -80,8 +92,8 @@ export const checkAuthenticated = () => async (dispatch) => {
 export const register = (username, password, email) => async (dispatch) => {
   const config = {
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
     },
     withCredentials: true,
   };
@@ -96,8 +108,8 @@ export const register = (username, password, email) => async (dispatch) => {
     );
 
     if (response.status === 201) {
-      sessionStorage.setItem("access_token", response.data.access_token);
-      sessionStorage.setItem("refresh_token", response.data.refresh_token);
+      sessionStorage.setItem('access_token', response.data.access_token);
+      sessionStorage.setItem('refresh_token', response.data.refresh_token);
 
       dispatch({
         type: REGISTER_SUCCESS,
@@ -117,7 +129,7 @@ export const register = (username, password, email) => async (dispatch) => {
 export const login = (email, password) => async (dispatch) => {
   const config = {
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     withCredentials: true,
   };
@@ -132,12 +144,12 @@ export const login = (email, password) => async (dispatch) => {
     );
 
     if (response.status === 200) {
-      sessionStorage.setItem("access_token", response.data.access_token);
-      sessionStorage.setItem("refresh_token", response.data.refresh_token);
+      sessionStorage.setItem('access_token', response.data.access_token);
+      sessionStorage.setItem('refresh_token', response.data.refresh_token);
 
       // Set the Authorization header for future API requests
       axios.defaults.headers.common[
-        "Authorization"
+        'Authorization'
       ] = `Bearer ${response.data.access}`;
 
       dispatch({
