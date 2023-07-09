@@ -35,7 +35,7 @@ const Login = ({ isAuthenticated, login }) => {
     } else {
       setError("Please provide a correct email");
     }
-    
+
     setLoading(false);
   };
 
@@ -85,7 +85,7 @@ const Login = ({ isAuthenticated, login }) => {
               </div>
 
               {/* Error message section */}
-              {error ? <ErrorMessage text={error} /> : ""}
+              {error ? <ErrorMessage text={error} /> : null}
               {/* End of error message section */}
 
               <div className="w-full flex flex-col">
