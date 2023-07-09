@@ -32,8 +32,11 @@ const Login = ({ isAuthenticated, login }) => {
       if (!success) {
         setError("Invalid email or password");
       }
-      setLoading(false);
+    } else {
+      setError("Please provide a correct email");
     }
+    
+    setLoading(false);
   };
 
   if (isAuthenticated) return <Navigate to="/dashboard" />;
