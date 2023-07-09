@@ -32,7 +32,24 @@ export const checkAuthenticated = () => async (dispatch) => {
     withCredentials: true,
   }
 
+<<<<<<< HEAD
   const body = JSON.stringify({ refresh:sessionStorage.getItem('refresh_token') });
+=======
+
+  // Checking whether user has refresh token at all to not send unnecessary requests to the backend
+  var refreshToken = sessionStorage.getItem("refresh_token");
+  if(refreshToken == null){
+    dispatch({
+      type: AUTHENTICATED_FAIL,
+      payload: false
+    })
+    return;
+  }
+
+
+  const body = JSON.stringify({ refresh:refreshToken });
+
+>>>>>>> 79b8fd58fc8e261bb9549d7bcddb215db8b377e2
 
   try {
     const response = await axios.post(
@@ -118,7 +135,7 @@ export const register = (username, password, email) => async (dispatch) => {
         // Set the Authorization header for future API requests
         axios.defaults.headers.common[
           "Authorization"
-        ] = `Bearer ${response.data.access}`;
+        ] = `Bearer ${response.data.access_token}`;
         
         dispatch({
           type: LOGIN_SUCCESS,
@@ -138,12 +155,11 @@ export const register = (username, password, email) => async (dispatch) => {
     const config = {
       headers: {
         'Accept': 'application/json',
-        "Content-Type": "application/json",
-        "Authorization":`Bearer ${sessionStorage.getItem('access_token')}`
+        "Content-Type": "application/json"
       },
-      withCredentials: true,
-      authorization: `Bearer ${sessionStorage.getItem('access_token')}`
+      withCredentials: true
     };
+    
   
     const body = JSON.stringify({ refresh_token: sessionStorage.getItem('refresh_token') });
   
