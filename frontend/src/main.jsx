@@ -7,6 +7,7 @@ import { Dashboard, Courses, Login, Shop, Register, Home } from "./pages";
 import { Provider } from "react-redux";
 import store from "./store";
 import { checkAuthenticated } from "./actions/auth";
+import { load_user } from "./actions/profile";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
 
 // Check if the user is authenticated before rendering the app
 store.dispatch(checkAuthenticated());
+store.dispatch(load_user());
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>

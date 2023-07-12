@@ -7,5 +7,5 @@ export {
     Navbar,
     Button,
     Hero,
-    ErrorMessage,
+    ErrorMessage
 }

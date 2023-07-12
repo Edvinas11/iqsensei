@@ -7,22 +7,6 @@ from .validations import custom_validation, validate_email, validate_password
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 
-# class UserCheckAuthenticated(APIView):
-#     permission_classes = (permissions.AllowAny,)
-
-#     def get(self, request):
-#         user = self.request.user
-
-#         try:
-#             isAuthenticated = user.is_authenticated
-
-#             if isAuthenticated:
-#                 return Response(status=status.HTTP_200_OK)
-#             else:
-#                 return Response(status=status.HTTP_401_UNAUTHORIZED)
-#         except:
-#             return Response(status=status.HTTP_400_BAD_REQUEST)
-
 
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -68,20 +52,12 @@ class UserLogin(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-# class UserLogout(APIView):
-# 	permission_classes = (permissions.AllowAny,)
-# 	authentication_classes = ()
-# 	def post(self, request):
-# 		logout(request)
-# 		return Response(status=status.HTTP_200_OK)
-
-
-# class UserView(APIView):
-# 	permission_classes = (permissions.IsAuthenticated,)
-# 	##
-# 	def get(self, request):
-# 		serializer = UserSerializer(request.user)
-# 		return Response({'user': serializer.data}, status=status.HTTP_200_OK)
+class UserView(APIView):
+	permission_classes = (permissions.IsAuthenticated,)
+	##
+	def get(self, request):
+		serializer = UserSerializer(request.user)
+		return Response({'profile': serializer.data}, status=status.HTTP_200_OK)
 
 
 class HomeView(APIView):

@@ -1,9 +1,5 @@
 export const authNavLinks = [
   {
-    id: "",
-    title: "Home",
-  },
-  {
     id: "dashboard",
     title: "Dashboard",
   },

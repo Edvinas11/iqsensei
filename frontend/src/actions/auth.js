@@ -19,6 +19,7 @@ export const updateToken = () => async (dispatch) => {
     withCredentials: true,
   };
 
+  // TODO ...
   const body = JSON.stringify({
     refresh_token: sessionStorage.getItem("refresh_token"),
   });
@@ -140,8 +141,9 @@ export const login = (email, password) => async (dispatch) => {
       });
     }
   } catch (error) {
-    // Handle the error
-    console.error(error);
+    dispatch({
+      type: LOGIN_FAIL,
+    });
   }
 };
 
