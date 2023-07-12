@@ -34,10 +34,12 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
       };
     case LOGOUT_SUCCESS:
-        return {
-            ...state,
-            isAuthenticated: false,
-        }
+      sessionStorage.removeItem("access_token");
+      sessionStorage.removeItem("refresh_token");
+      return {
+        ...state,
+        isAuthenticated: false
+      };
     case LOGOUT_FAIL:
     case REGISTER_FAIL:
     case LOGIN_FAIL:

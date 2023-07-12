@@ -1,6 +1,7 @@
 import {
   LOAD_USER_PROFILE_SUCCESS,
   LOAD_USER_PROFILE_FAIL,
+  LOGOUT_SUCCESS,
 } from "../actions/types";
 
 const initialState = {
@@ -19,6 +20,7 @@ export default function (state = initialState, action) {
         username: payload.profile.username,
       };
     case LOAD_USER_PROFILE_FAIL:
+    case LOGOUT_SUCCESS:
       return {
         ...state,
         email: "",

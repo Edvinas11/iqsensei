@@ -9,6 +9,7 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
 } from "./types";
+import { load_user } from "./profile";
 
 export const updateToken = () => async (dispatch) => {
   const config = {
@@ -135,6 +136,8 @@ export const login = (email, password) => async (dispatch) => {
       dispatch({
         type: LOGIN_SUCCESS,
       });
+
+      dispatch(load_user());
     } else {
       dispatch({
         type: LOGIN_FAIL,
