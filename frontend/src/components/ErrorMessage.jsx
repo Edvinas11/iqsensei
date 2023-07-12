@@ -14,7 +14,7 @@ const ErrorMessage = ({ text }) => {
       </svg>
       <span className="sr-only">Info</span>
       <div>
-        <p className="font-medium">{text}</p>
+        <p className="font-poppins font-medium">{text}</p>
       </div>
     </div>
   );

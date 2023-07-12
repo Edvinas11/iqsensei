@@ -87,8 +87,8 @@ export const register = (username, password, email) => async (dispatch) => {
     );
 
     if (response.status === 201) {
-      sessionStorage.setItem("access_token", response.data.access_token);
-      sessionStorage.setItem("refresh_token", response.data.refresh_token);
+      // sessionStorage.setItem("access_token", response.data.access_token);
+      // sessionStorage.setItem("refresh_token", response.data.refresh_token);
 
       dispatch({
         type: REGISTER_SUCCESS,

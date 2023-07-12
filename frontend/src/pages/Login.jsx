@@ -23,21 +23,27 @@ const Login = ({ isAuthenticated, login }) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    if (isValidEmail(email)) {
-      const success = await login(email, password);
-      if (!success) {
-        setError("Invalid email or password");
+    const onSubmit = async (e) => {
+      e.preventDefault();
+      setLoading(true);
+    
+      if (!isValidEmail(email)) {
+        setError("Please provide a valid email address");
+        setLoading(false);
+        return;
       }
-    } else {
-      setError("Please provide a correct email");
-    }
-
-    setLoading(false);
-  };
+    
+      try {
+        const success = await login(email, password);
+        if (!success) {
+          setError("Invalid email or password");
+        }
+      } catch (error) {
+        setError("Unable to login. Please try again later");
+      }
+    
+      setLoading(false);
+    };
 
   if (isAuthenticated) return <Navigate to="/dashboard" />;
 
