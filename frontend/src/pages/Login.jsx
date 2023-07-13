@@ -28,7 +28,7 @@ const Login = ({ isAuthenticated, login }) => {
     setLoading(true);
 
     if (!isValidEmail(email)) {
-      setError("Please provide a valid email address");
+      setError("Please provide a valid email address.");
       setLoading(false);
       return;
     }
@@ -36,10 +36,10 @@ const Login = ({ isAuthenticated, login }) => {
     try {
       const success = await login(email, password);
       if (!success) {
-        setError("Invalid email or password");
+        setError("Invalid email or password.");
       }
     } catch (error) {
-      setError("Unable to login. Please try again later");
+      setError("Unable to login. Please try again later.");
     }
 
     setLoading(false);

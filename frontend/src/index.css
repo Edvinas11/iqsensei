@@ -57,11 +57,6 @@
   }
 }
 
-.feature-card:hover {
-  background: var(--black-gradient);
-  box-shadow: var(--card-shadow);
-}
-
 .feedback-container .feedback-card:last-child {
   margin-right: 0px;
 }
@@ -71,5 +66,5 @@
 }
 
 .feedback-card:hover {
-  background: var(--black-gradient);
+  box-shadow: var(--card-shadow);
 }

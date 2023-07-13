@@ -11,21 +11,6 @@ import {
 } from "./types";
 import { load_user } from "./profile";
 
-export const updateToken = () => async (dispatch) => {
-  const config = {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  };
-
-  // TODO ...
-  const body = JSON.stringify({
-    refresh_token: sessionStorage.getItem("refresh_token"),
-  });
-};
-
 export const checkAuthenticated = () => async (dispatch) => {
   const config = {
     headers: {

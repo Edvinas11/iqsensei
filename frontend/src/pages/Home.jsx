@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../style";
-import { Hero, Navbar } from "../components";
+import { Hero, Navbar, Features } from "../components";
 import { connect } from "react-redux";
 
 const Home = () => {
@@ -18,6 +18,11 @@ const Home = () => {
         </div>
       </div>
 
+      <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
+        <div className={`${styles.boxWidth}`}>
+          <Features />
+        </div>
+      </div>
     </div>
   );
 };

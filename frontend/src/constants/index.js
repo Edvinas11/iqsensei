@@ -20,6 +20,27 @@ export const guestNavLinks = [
   }
 ];
 
+export const features = [
+  {
+    id: "feature-1",
+    title: "Mokykis kitaip",
+    content: 
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel elit sed urna fermentum efficitur.",
+  },
+  {
+    id: "feature-2",
+    title: "Raunam mokslo šaknis kartu",
+    content: 
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel elit sed urna fermentum efficitur.",
+  },
+  {
+    id: "feature-3",
+    title: "Nebijok klysti",
+    content: 
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel elit sed urna fermentum efficitur.",
+  }
+]
+
 export const themeColors = [
   {
     name: "purple-theme",
