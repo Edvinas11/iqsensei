@@ -1,3 +1,5 @@
+import { pencil } from "../assets";
+
 export const authNavLinks = [
   {
     id: "dashboard",
@@ -39,7 +41,31 @@ export const features = [
     content: 
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel elit sed urna fermentum efficitur.",
   }
-]
+];
+
+export const benefits = [
+  {
+    id: "benefit-1",
+    icon: pencil,
+    title: "Lorem Ipsum",
+    content: 
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  },
+  {
+    id: "benefit-2",
+    icon: pencil,
+    title: "Lorem Ipsum",
+    content: 
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  },
+  {
+    id: "benefit-3",
+    icon: pencil,
+    title: "Lorem Ipsum",
+    content: 
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  },
+];
 
 export const themeColors = [
   {

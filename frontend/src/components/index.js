@@ -4,6 +4,8 @@ import Hero from "./Hero";
 import ErrorMessage from "./ErrorMessage";
 import Features from "./Features";
 import FeatureCard from "./FeatureCard";
+import Benefits from "./Benefits";
+import CTA from "./CTA";
 
 export {
     Navbar,
@@ -12,4 +14,6 @@ export {
     ErrorMessage,
     Features,
     FeatureCard,
+    Benefits,
+    CTA,
 }

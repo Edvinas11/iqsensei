@@ -31,7 +31,7 @@ const Hero = () => {
         </form>
       </div>
       <div className={`flex-1 flex ${styles.flexStart} md:my-0 my-10 xs:mx-10 relative`}>
-        <img src={welcome} alt="welcome" className="w-[100%] h-auto relative z-[5]"/>
+        <img src={welcome} alt="welcome" className="w-[100%] h-auto relative"/>
       </div>
     </section>
   );
