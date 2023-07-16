@@ -45,7 +45,7 @@ const Footer = () => {
 
       <div className="w-full flex justify-between items-center md:flex-row flex-col pt-6 border-t-[1px] border-t-[#5e5e61]">
         <p className="font-poppins font-normal text-center text-[18px] leading-[27px] text-black">
-          Copyright Ⓒ 2022 iqsensei. All Rights Reserved.
+          Copyright Ⓒ 2023 iqsensei. All Rights Reserved.
         </p>
       </div>
     </section>
