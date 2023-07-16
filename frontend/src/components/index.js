@@ -6,6 +6,7 @@ import Features from "./Features";
 import FeatureCard from "./FeatureCard";
 import Benefits from "./Benefits";
 import CTA from "./CTA";
+import Footer from "./Footer";
 
 export {
     Navbar,
@@ -16,4 +17,5 @@ export {
     FeatureCard,
     Benefits,
     CTA,
+    Footer,
 }
