@@ -47,10 +47,12 @@ const Register = ({ isAuthenticated, register }) => {
       const success = await register(username, password, email);
       if(success){
         setAccountCreated(true);
-      } else {
+      }
+      else {
         setError("An account with this email already exists. Please use a different email.");
       }
-    } catch (error) {
+    }
+    catch (error) {
       setError("Unable to register an account. Please try again later.");
       setAccountCreated(false);
     }

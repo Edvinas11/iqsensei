@@ -80,15 +80,19 @@ export const register = (username, password, email) => async (dispatch) => {
       dispatch({
         type: REGISTER_SUCCESS,
       });
-    } else {
+      return true;
+    }
+    else {
       dispatch({
         type: REGISTER_FAIL,
       });
+      return false;
     }
   } catch (error) {
     dispatch({
       type: REGISTER_FAIL,
     });
+    return false;
   }
 };
 
