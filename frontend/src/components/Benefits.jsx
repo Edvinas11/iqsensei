@@ -21,11 +21,11 @@ const BenefitCard = ({ title, icon, content, index }) => (
 const Benefits = () => {
   return (
     <section id="benefits" className={layout.section}>
-      <div className={layout.sectionInfo}>
+      <div className={`${layout.sectionInfo} my-10`}>
         <img src={books} alt="books" className='w-[100%] h-auto' />
       </div>
 
-      <div className={`${layout.sectionImg} flex-col`}>
+      <div className={`${layout.sectionImg} flex-col py-16 my-10`}>
         {benefits.map((benefit, index) => (
           <BenefitCard key={benefit.id} {...benefit} index={index}/>
         ))}

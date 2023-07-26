@@ -1,4 +1,4 @@
-import { pencil } from "../assets";
+import { pencil, leader1, leader2 } from "../assets";
 
 export const authNavLinks = [
   {
@@ -125,29 +125,44 @@ export const footerLinks = [
   },
 ];
 
-export const themeColors = [
+export const leaders = [
   {
-    name: "purple-theme",
-    color: "#1A97F5",
+    id: "leader-1",
+    image: leader1,
+    name: "Edvinas Burba",
+    position: "CEO",
   },
   {
-    name: "green-theme",
-    color: "#03C9D7",
+    id: "leader-2",
+    image: leader2,
+    name: "Rapolas Jonas Labutis",
+    position: "CEO",
   },
-  {
-    name: "purple-theme",
-    color: "#7352FF",
-  },
-  {
-    name: "red-theme",
-    color: "#FF5C8E",
-  },
-  {
-    name: "indigo-theme",
-    color: "#1E4DB7",
-  },
-  {
-    color: "#FB9678",
-    name: "orange-theme",
-  },
-];
+]
+
+// export const themeColors = [
+//   {
+//     name: "purple-theme",
+//     color: "#1A97F5",
+//   },
+//   {
+//     name: "green-theme",
+//     color: "#03C9D7",
+//   },
+//   {
+//     name: "purple-theme",
+//     color: "#7352FF",
+//   },
+//   {
+//     name: "red-theme",
+//     color: "#FF5C8E",
+//   },
+//   {
+//     name: "indigo-theme",
+//     color: "#1E4DB7",
+//   },
+//   {
+//     color: "#FB9678",
+//     name: "orange-theme",
+//   },
+// ];

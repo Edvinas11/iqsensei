@@ -1,4 +1,4 @@
-import { authNavLinks, guestNavLinks, themeColors } from "../constants";
+import { authNavLinks, guestNavLinks } from "../constants";
 import { logo, menu, close } from "../assets";
 import React, { useState, Fragment } from "react";
 import Button from "./Button";
@@ -93,8 +93,9 @@ const Navbar = ({ isAuthenticated, logout }) => {
 
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
-      <img src={logo} alt="iqsensei" className="w-[140px] h-[60px]" />
-
+      <a href="/">
+        <img src={logo} alt="iqsensei" className="w-[140px] h-[60px]" />
+      </a>
       <ul className="list-none md:flex hidden justify-end items-center flex-1">
         { isAuthenticated ? authLinks : guestLinks }
       </ul>

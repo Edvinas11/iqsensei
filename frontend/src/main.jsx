@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PrivateRoute from "./hocs/PrivateRoute";
-import { Dashboard, Courses, Login, Shop, Register, Home } from "./pages";
+import { Dashboard, Courses, Login, Shop, Register, Home, About } from "./pages";
 import { Provider } from "react-redux";
 import store from "./store";
 import { checkAuthenticated } from "./actions/auth";
@@ -33,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "register",
     element: <Register />,
+  },
+  {
+    path: "aboutus",
+    element: <About />,
   },
 ]);
 

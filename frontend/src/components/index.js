@@ -7,6 +7,8 @@ import FeatureCard from "./FeatureCard";
 import Benefits from "./Benefits";
 import CTA from "./CTA";
 import Footer from "./Footer";
+import Mission from "./Mission";
+import Leaders from "./Leaders";
 
 export {
     Navbar,
@@ -18,4 +20,6 @@ export {
     Benefits,
     CTA,
     Footer,
+    Mission,
+    Leaders,
 }

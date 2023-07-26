@@ -4,6 +4,7 @@ import Login from "./Login";
 import Shop from "./Shop";
 import Register from "./Register";
 import Home from "./Home";
+import About from "./About";
 
 export {
     Dashboard,
@@ -11,5 +12,6 @@ export {
     Login,
     Shop,
     Register,
-    Home
+    Home,
+    About
 }
