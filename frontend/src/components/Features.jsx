@@ -6,7 +6,7 @@ import FeatureCard from './FeatureCard';
 const Features = () => {
   return (
     <section id='features' className={`${styles.paddingY} ${styles.flexCenter} flex-col relative`}>
-        <div className='flex flex-wrap ss:justify-start items-center justify-center w-full feedback-container relative'>
+        <div className='flex flex-wrap items-center justify-center w-full feedback-container relative'>
             {features.map((card) => (
                 <FeatureCard key={card.id} {...card} />
             ))}
