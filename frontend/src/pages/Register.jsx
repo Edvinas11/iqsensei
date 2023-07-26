@@ -109,7 +109,7 @@ const Register = ({ isAuthenticated, register }) => {
                   type="password"
                   placeholder="Password"
                   onChange={(e) => onChange(e)}
-                  minLength="6"
+                  minLength="8"
                   required
                   name="password"
                   value={password}
@@ -120,7 +120,7 @@ const Register = ({ isAuthenticated, register }) => {
                   type="password"
                   placeholder="Repeat password"
                   onChange={(e) => onChange(e)}
-                  minLength="6"
+                  minLength="8"
                   required
                   name="re_password"
                   value={re_password}
