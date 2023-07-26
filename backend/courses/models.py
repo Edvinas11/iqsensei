@@ -41,13 +41,13 @@ class CourseManager():
         return course
     
 
-class Course():
+class Course(models.Model):
     course_id = models.AutoField(primary_key=True)
 
     title = models.CharField(max_length=100)
     description = models.TextField()
     
-    author = models.ForeignKey(AppUser, on_delete=models.SET_NULL, related_name='courses')
+    author = models.ForeignKey(AppUser, on_delete=models.SET_NULL, null=True, related_name='courses')
     contributors = models.ManyToManyField(AppUser, related_name='contributed_courses')
 
     rating = models.SmallIntegerField(default=0)
@@ -58,7 +58,7 @@ class Course():
     created_at = models.DateTimeField()
 
     updated_at = models.DateTimeField()
-    update_count = models.IntegerField(default=0)
+    updated_count = models.IntegerField(default=0)
 
     REQUIRED_FIELDS = ['title', 'author', 'price', 'created_at'] # List of fields that are required when creating a course
     objects = CourseManager()
