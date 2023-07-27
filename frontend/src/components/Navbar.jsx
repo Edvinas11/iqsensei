@@ -93,7 +93,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
 
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
-      <a href="/">
+      <a href={`${ isAuthenticated ? 'dashboard' : '/'}`}>
         <img src={logo} alt="iqsensei" className="w-[140px] h-[60px]" />
       </a>
       <ul className="list-none md:flex hidden justify-end items-center flex-1">

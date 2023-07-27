@@ -8,6 +8,8 @@ import {
   AUTHENTICATED_SUCCESS,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
+  SILENT_TOKEN_REFRESH_SUCCESS,
+  SILENT_TOKEN_REFRESH_FAIL,
 } from "./types";
 import { load_user } from "./profile";
 
@@ -74,15 +76,11 @@ export const register = (username, password, email) => async (dispatch) => {
     );
 
     if (response.status === 201) {
-      // sessionStorage.setItem("access_token", response.data.access_token);
-      // sessionStorage.setItem("refresh_token", response.data.refresh_token);
-
       dispatch({
         type: REGISTER_SUCCESS,
       });
       return true;
-    }
-    else {
+    } else {
       dispatch({
         type: REGISTER_FAIL,
       });
@@ -144,7 +142,7 @@ export const logout = () => async (dispatch) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      "Authorization":`Bearer ${sessionStorage.getItem('access_token')}`
+      Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
     },
     withCredentials: true,
   };
@@ -170,6 +168,47 @@ export const logout = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOGOUT_FAIL,
+    });
+  }
+};
+
+export const updateToken = () => async (dispatch) => {
+  const config = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    withCredentials: true,
+  };
+
+  const body = JSON.stringify({
+    refresh: sessionStorage.getItem("refresh_token"),
+  });
+
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_APP_API_URL}/api/token/refresh`,
+      body,
+      config
+    );
+
+    if (response.status === 200) {
+      sessionStorage.setItem("access_token", response.data.access);
+      dispatch({
+        type: SILENT_TOKEN_REFRESH_SUCCESS,
+        payload: true,
+      });
+    } else {
+      logout();
+      dispatch({
+        type: SILENT_TOKEN_REFRESH_FAIL,
+        payload: false,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: SILENT_TOKEN_REFRESH_FAIL,
+      payload: false,
     });
   }
 };

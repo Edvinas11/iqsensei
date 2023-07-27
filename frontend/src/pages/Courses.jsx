@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../style";
 import { Navbar } from "../components";
+import { getAllCourses } from "../actions/course";
+import { connect } from "react-redux";
+import { CourseCard } from "../components";
 
-const Courses = () => {
+const Courses = ({ getAllCourses }) => {
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getAllCourses();
+        setCourses(response);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    fetchData();
+  }, [getAllCourses]);
+
   return (
     <div className="bg-primary w-full overflow-hidden">
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
@@ -18,10 +36,15 @@ const Courses = () => {
               Featured Courses
             </h1>
           </div>
+          <div className='flex flex-wrap items-center justify-start w-full feedback-container relative'>
+            {courses.length === 0 ? (<p>No courses at the moment.</p>) : (courses.map((course) => (
+                <CourseCard key={course.course_id} {...course} />
+              )))}
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Courses;
+export default connect(null, { getAllCourses })(Courses);
