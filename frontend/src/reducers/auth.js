@@ -7,6 +7,8 @@ import {
   AUTHENTICATED_SUCCESS,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
+  SILENT_TOKEN_REFRESH_FAIL,
+  SILENT_TOKEN_REFRESH_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -18,6 +20,8 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case AUTHENTICATED_SUCCESS:
+    case SILENT_TOKEN_REFRESH_SUCCESS:
+    case SILENT_TOKEN_REFRESH_FAIL:
     case AUTHENTICATED_FAIL:
       return {
         ...state,
