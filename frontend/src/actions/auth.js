@@ -202,13 +202,13 @@ export const updateToken = () => async (dispatch) => {
       logout();
       dispatch({
         type: SILENT_TOKEN_REFRESH_FAIL,
-        payload: true,
+        payload: false,
       });
     }
   } catch (error) {
     dispatch({
       type: SILENT_TOKEN_REFRESH_FAIL,
-      payload: true,
+      payload: false,
     });
   }
 };

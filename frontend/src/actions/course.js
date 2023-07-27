@@ -6,8 +6,7 @@ export const getAllCourses = () => async (dispatch) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-    },
-    withCredentials: true,
+    }
   };
 
   try {
