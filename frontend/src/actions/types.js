@@ -11,3 +11,7 @@ export const LOGOUT_FAIL = 'LOGOUT_FAIL';
 // Profile Dispatch States
 export const LOAD_USER_PROFILE_SUCCESS = 'LOAD_USER_PROFILE_SUCCESS';
 export const LOAD_USER_PROFILE_FAIL = 'LOAD_USER_PROFILE_FAIL';
+
+// Course Dispatch States
+export const LOAD_ALL_COURSES_SUCCESS = `LOAD_ALL_COURSES_SUCCESS`;
+export const LOAD_ALL_COURSES_FAIL = `LOAD_ALL_COURSES_FAIL`;

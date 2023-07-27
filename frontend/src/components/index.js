@@ -9,6 +9,7 @@ import CTA from "./CTA";
 import Footer from "./Footer";
 import Mission from "./Mission";
 import Leaders from "./Leaders";
+import CourseCard from "./CourseCard";
 
 export {
     Navbar,
@@ -22,4 +23,5 @@ export {
     Footer,
     Mission,
     Leaders,
+    CourseCard,
 }

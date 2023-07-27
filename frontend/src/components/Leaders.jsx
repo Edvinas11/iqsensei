@@ -7,7 +7,7 @@ const LeaderCard = ({ name, image, position }) => {
     <div className="flex justify-between flex-col px-10 py-12 rounded-[20px] max-w-[370px] md:mr-10 sm:mr-5 mr-0 my-5 feedback-card">
       <div className="flex flex-col justify-center items-center">
         {/* Profile picture */}
-        <div className={`w-[80%] h-[80%] ${styles.flexCenter}`}>
+        <div className={`w-[100%] h-[100%] ${styles.flexCenter}`}>
           <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
             <img
               src={image}

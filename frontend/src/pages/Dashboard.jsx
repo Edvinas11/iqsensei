@@ -11,7 +11,6 @@ const Dashboard = ({ username }) => {
   }
 
   useEffect(() => {
-    console.log(username);
     const name = capitalizeFirstLetter(username);
     setGreeting(`Hi, ${name}!`);
   }, [username]);
