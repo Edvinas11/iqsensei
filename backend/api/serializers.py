@@ -25,7 +25,7 @@ class UserLoginSerializer(serializers.Serializer):
             raise ValidationError('user not found')
         return user
 
-class UserSerializer(serializers.ModelSerializer):
+class UserPublicSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        fields = ('email', 'username')
+        exclude = ['password', 'is_superuser', 'groups', 'user_permissions', 'user_id', 'email']

@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model, login, logout
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer
+from .serializers import UserRegisterSerializer, UserLoginSerializer, UserPublicSerializer
 from rest_framework import permissions, status
 from .validations import custom_validation, validate_email, validate_password
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -55,7 +55,7 @@ class UserView(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
 	##
 	def get(self, request):
-		serializer = UserSerializer(request.user)
+		serializer = UserPublicSerializer(request.user)
 		return Response({'profile': serializer.data}, status=status.HTTP_200_OK)
 
 
