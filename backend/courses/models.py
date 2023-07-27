@@ -3,7 +3,7 @@ from api.models import AppUser
 from django.utils import timezone
 
 
-class CourseManager():
+class CourseManager(models.Manager):
     def create_course(self, title, author, price, description="", contributors=None):
         if title is None or title == "":
             raise ValueError('Title is required.')
