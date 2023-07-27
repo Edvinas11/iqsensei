@@ -7,6 +7,7 @@ import pencil from "./pencil.svg";
 import mission from "./mission.png";
 import leader1 from "./leader1.jpg";
 import leader2 from "./leader2.jpg";
+import coin from "./coin.svg";
 
 export {
     logo,
@@ -18,4 +19,5 @@ export {
     mission,
     leader1,
     leader2,
+    coin,
 }

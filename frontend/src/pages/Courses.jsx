@@ -12,7 +12,6 @@ const Courses = ({ getAllCourses }) => {
     const fetchData = async () => {
       try {
         const response = await getAllCourses();
-        console.log(response);
         setCourses(response);
       } catch (error) {
         console.error("Error fetching courses:", error);
@@ -38,9 +37,9 @@ const Courses = ({ getAllCourses }) => {
             </h1>
           </div>
           <div className='flex flex-wrap items-center justify-start w-full feedback-container relative'>
-            {courses.map((course) => (
+            {courses.length === 0 ? (<p>No courses at the moment.</p>) : (courses.map((course) => (
                 <CourseCard key={course.course_id} {...course} />
-              ))}
+              )))}
           </div>
         </div>
       </div>
