@@ -53,7 +53,7 @@ class Course(models.Model):
     rating = models.SmallIntegerField(default=0)
     rating_count = models.IntegerField(default=0)
 
-    price = models.FloatField()
+    price = models.IntegerField()
 
     created_at = models.DateTimeField()
 
