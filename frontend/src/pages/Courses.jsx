@@ -29,14 +29,14 @@ const Courses = ({ getAllCourses }) => {
         </div>
       </div>
 
-      <div className={`bg-primary ${styles.flexStart}`}>
+      <div className={`bg-primary ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <div className="flex flex-row justify-between items-center w-full p-10">
             <h1 className="flex-1 font-poppins font-semibold text-black text-[52px] ss:leading-[100.8px] leading-[75px]">
               Featured Courses
             </h1>
           </div>
-          <div className='flex flex-wrap items-center justify-start w-full feedback-container relative'>
+          <div className='flex flex-wrap items-center justify-center w-full feedback-container relative'>
             {courses.length === 0 ? (<p>No courses at the moment.</p>) : (courses.map((course) => (
                 <CourseCard key={course.course_id} {...course} />
               )))}

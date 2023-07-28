@@ -5,8 +5,8 @@ import { coin } from "../assets";
 
 const CourseCard = ({ title, description, rating, price }) => {
   return (
-    <div className="flex justify-between flex-col px-5 py-5 rounded-[30px] bg-transparent max-w-[570px] mx-5 my-5 box-shadow">
-      <div className="flex flex-col px-10 py-12 bg-white rounded-[15px]">
+    <div className="flex justify-between flex-col px-5 py-5 rounded-[30px] bg-transparent max-w-[380px] mx-5 my-5 box-shadow">
+      <div className="flex flex-col px-10 py-12 bg-white rounded-[15px] h-[400px]">
         <h4 className="font-poppins font-semibold text-[32px] text-black mb-4">
           {title}
         </h4>
