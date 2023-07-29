@@ -48,16 +48,16 @@ class Course(models.Model):
     description = models.TextField()
     
     author = models.ForeignKey(AppUser, on_delete=models.SET_NULL, null=True, related_name='courses')
-    contributors = models.ManyToManyField(AppUser, related_name='contributed_courses')
+    contributors = models.ManyToManyField(AppUser, related_name='contributed_courses', blank=True)
 
     rating = models.SmallIntegerField(default=0)
     rating_count = models.IntegerField(default=0)
 
     price = models.IntegerField()
 
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(default=timezone.now, editable=False, null=True)
 
-    updated_at = models.DateTimeField()
+    updated_at = models.DateTimeField(default=timezone.now, null=True)
     updated_count = models.IntegerField(default=0)
 
     REQUIRED_FIELDS = ['title', 'author', 'price', 'created_at'] # List of fields that are required when creating a course
