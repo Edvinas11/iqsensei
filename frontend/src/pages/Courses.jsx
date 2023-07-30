@@ -37,7 +37,7 @@ const Courses = ({ getAllCourses }) => {
             </h1>
           </div>
           <div className='flex flex-wrap items-center justify-center w-full feedback-container relative'>
-            {courses.length === 0 ? (<p>No courses at the moment.</p>) : (courses.map((course) => (
+            {courses === undefined || courses?.length === 0 ? (<p className={`${styles.paragraph} text-base pr-2`}>No courses at the moment.</p>) : (courses?.map((course) => (
                 <CourseCard key={course.course_id} {...course} />
               )))}
           </div>

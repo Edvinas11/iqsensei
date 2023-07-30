@@ -194,6 +194,12 @@ export const updateToken = () => async (dispatch) => {
 
     if (response.status === 200) {
       sessionStorage.setItem("access_token", response.data.access);
+
+      // Set the Authorization header for future API requests
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${response.data.access_token}`;
+
       dispatch({
         type: SILENT_TOKEN_REFRESH_SUCCESS,
         payload: true,
