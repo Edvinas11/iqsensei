@@ -32,9 +32,16 @@ class Courses(APIView):
             queryset = Course.objects.all()
             serializer = CourseSerializer(queryset, many=True)
         else:
-            queryset = Course.objects.get(course_id=pk)
+            try:
+                queryset = Course.objects.get(course_id=pk)
+            except Course.DoesNotExist:
+                return Response({"error": "Invalid course ID"}, status=status.HTTP_400_BAD_REQUEST)
+            
             serializer = CourseSerializer(queryset)
+
         return Response(serializer.data)
+
+
     
     def put(self, request, pk):
         course = Course.objects.get(course_id=pk)
