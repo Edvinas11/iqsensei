@@ -27,9 +27,13 @@ class Courses(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
-    def get(self, request):
-        queryset = Course.objects.all()
-        serializer = CourseSerializer(queryset, many=True)
+    def get(self, request, pk=None):
+        if pk == None:
+            queryset = Course.objects.all()
+            serializer = CourseSerializer(queryset, many=True)
+        else:
+            queryset = Course.objects.get(course_id=pk)
+            serializer = CourseSerializer(queryset)
         return Response(serializer.data)
     
     def put(self, request, pk):
