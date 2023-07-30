@@ -24,6 +24,10 @@ class AppUserManager(BaseUserManager):
 class AppUser(AbstractBaseUser, PermissionsMixin):
     user_id = models.AutoField(primary_key=True)
     email = models.EmailField(max_length=50, unique=True)
+    
+    coins = models.IntegerField(default=0)
+    xp_points = models.IntegerField(default=0)
+
     username = models.CharField(max_length=50)
     USERNAME_FIELD = 'email' # The field used for authentication
     REQUIRED_FIELDS = ['username'] # List of fields that are required when creating a user
