@@ -1,12 +1,17 @@
 import React from "react";
 import styles from "../style";
 import Button from "./Button";
-import { coin } from "../assets";
+import { coin, star } from "../assets";
 
-const CourseCard = ({ title, description, rating, price }) => {
+const CourseCard = ({ title, description, rating, price, rating_count }) => {
   return (
     <div className="flex justify-between flex-col px-5 py-5 rounded-[30px] bg-transparent max-w-[380px] mx-5 my-5 box-shadow">
-      <div className="flex flex-col px-10 py-12 bg-white rounded-[15px] h-[400px]">
+      <div className="flex flex-row absolute mt-3 ml-8 items-center justify-center">
+        <img src={star} alt="star" className="w-[20px] h-[20px] object-contain mr-1"/>
+        <p className={`${styles.paragraph} text-base mt-1 mr-1`}>{rating}</p>
+        <p className={`${styles.paragraph} text-stone-400 text-base mt-1`}>({rating_count})</p>
+      </div>
+      <div className="flex flex-col px-8 py-12 bg-white rounded-[15px] h-[400px]">
         <h4 className="font-poppins font-semibold text-[32px] text-black mb-4">
           {title}
         </h4>
