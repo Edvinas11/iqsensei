@@ -11,7 +11,7 @@ export const getAllCourses = () => async (dispatch) => {
 
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_APP_API_URL}/courses/all`,
+      `${import.meta.env.VITE_APP_API_URL}/courses`,
       config
     );
     if (response.status === 200) {
