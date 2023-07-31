@@ -4,7 +4,7 @@ import Button from "./Button";
 import { coin, star } from "../assets";
 import { Link } from "react-router-dom";
 
-const CourseCard = ({ course_id, title, description, rating, price, rating_count }) => {
+const CourseCard = ({ course_id, title, short_description, rating, price, rating_count }) => {
   return (
     <div className="flex justify-between flex-col px-5 py-5 rounded-[30px] bg-transparent max-w-[380px] mx-5 my-5 course-card">
       <div className="flex flex-row absolute mt-3 ml-8 items-center justify-center">
@@ -18,7 +18,7 @@ const CourseCard = ({ course_id, title, description, rating, price, rating_count
           <h4 className="font-poppins font-semibold text-[32px] text-black mb-4">
             {title}
           </h4>
-          <p className={`${styles.paragraph} text-base mb-10`}>{description}</p>
+          <p className={`${styles.paragraph} text-base mb-10`}>{short_description}</p>
         </div>
       </Link>
       

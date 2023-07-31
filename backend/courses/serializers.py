@@ -24,7 +24,9 @@ class CourseSerializer(serializers.ModelSerializer):
     warnings = WarningSerializer(many=True, read_only=True)
     class Meta:
         model = Course
-        fields = ("title", 
+        fields = (
+                "course_id",
+                "title", 
                 "description",
                 "sections",
                 "mode",
@@ -41,7 +43,9 @@ class CourseSerializer(serializers.ModelSerializer):
 class AbstractCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ("title",
+        fields = (
+                "course_id",
+                "title",
                 "short_description",
                 "mode",
                 "rating",
