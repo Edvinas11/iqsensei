@@ -7,7 +7,7 @@ from rest_framework.response import Response
 
 from .models import Course
 from api.models import AppUser
-from .serializers import CourseSerializer, CourseCreateSerializer
+from .serializers import CourseSerializer, AbstractCourseSerializer, CourseCreateSerializer
 
 class Courses(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -30,14 +30,15 @@ class Courses(APIView):
     def get(self, request, pk=None):
         if pk == None:
             queryset = Course.objects.all()
-            serializer = CourseSerializer(queryset, many=True)
+            
+            serializer = AbstractCourseSerializer(queryset, many=True)
         else:
             try:
-                queryset = Course.objects.get(course_id=pk)
+                queryset = Course.objects.filter(course_id=pk).prefetch_related('sections').prefetch_related('reviews').prefetch_related('warnings')
             except Course.DoesNotExist:
                 return Response({"error": "Invalid course ID"}, status=status.HTTP_400_BAD_REQUEST)
             
-            serializer = CourseSerializer(queryset)
+            serializer = CourseSerializer(queryset[0])
 
         return Response(serializer.data)
 

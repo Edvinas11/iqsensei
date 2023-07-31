@@ -1,6 +1,15 @@
 from django.db import models
 from api.models import AppUser
 from django.utils import timezone
+import os
+
+class Tag(models.Model):
+    title = models.CharField(max_length=50)
+    color_hex = models.CharField(max_length=7) # pvz #FFFFFF
+
+    def __str__(self):
+        return self.title
+    
 
 
 class CourseManager(models.Manager):
@@ -45,7 +54,20 @@ class Course(models.Model):
     course_id = models.AutoField(primary_key=True)
 
     title = models.CharField(max_length=100)
-    description = models.TextField()
+
+    short_description = models.TextField(default="")
+    description = models.TextField(default="")
+
+    mode = models.SmallIntegerField(default=0) # Mode is represented in numbers 1/2/3/...
+    duration = models.DurationField(null=True)
+    tags = models.ManyToManyField(Tag, related_name="courses")
+    
+
+    def course_image_upload_path(instance, filename):
+        # Construct the upload path using the course_id
+        return os.path.join("courseData/images", f"course_{instance.course_id}", filename)
+    image = models.ImageField(upload_to=course_image_upload_path, null=True)
+
     
     author = models.ForeignKey(AppUser, on_delete=models.SET_NULL, null=True, related_name='courses')
     contributors = models.ManyToManyField(AppUser, related_name='contributed_courses', blank=True)
@@ -57,6 +79,8 @@ class Course(models.Model):
 
     created_at = models.DateTimeField(default=timezone.now, editable=False, null=True)
 
+    related_courses = models.ManyToManyField('self', blank=True)
+
     updated_at = models.DateTimeField(default=timezone.now, null=True)
     updated_count = models.IntegerField(default=0)
 
@@ -65,3 +89,19 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Review(models.Model):
+    author = models.ForeignKey(AppUser, on_delete=models.SET_NULL, null=True, related_name='reviews')
+    message = models.TextField()
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='reviews')
+
+class Section(models.Model):
+    title = models.CharField(max_length=100)
+    section_description = models.TextField()
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='sections')
+
+class Warning(models.Model):
+    title = models.CharField(max_length=100)
+    detailed_message = models.TextField()
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='warnings', null=True)
