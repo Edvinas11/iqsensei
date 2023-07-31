@@ -14,7 +14,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
       {authNavLinks.map((nav, index) => (
         <li
           key={nav.id}
-          className={`font-poppins font-normal font-pointer text-[16px] mb-4 text-white`}
+          className={`font-poppins font-normal cursor-pointer text-[16px] mb-4 text-white`}
         >
           <Link to={`/${nav.id}`}>{nav.title}</Link>
         </li>
@@ -31,7 +31,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
       {guestNavLinks.map((nav, index) => (
         <li
           key={nav.id}
-          className={`font-poppins font-normal font-pointer text-[16px] mb-4 text-white`}
+          className={`font-poppins font-normal cursor-pointer text-[16px] mb-4 text-white`}
         >
           <Link to={`/${nav.id}`}>{nav.title}</Link>
         </li>
@@ -54,7 +54,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
       {guestNavLinks.map((nav, index) => (
           <li
             key={nav.id}
-            className={`font-poppins font-normal font-pointer text-[16px] mr-10 text-black`}
+            className={`font-poppins font-normal cursor-pointer text-[16px] mr-10 text-black hover:text-secondary`}
           >
             <Link to={`/${nav.id}`}>{nav.title}</Link>
           </li>
@@ -78,13 +78,13 @@ const Navbar = ({ isAuthenticated, logout }) => {
       {authNavLinks.map((nav, index) => (
           <li
             key={nav.id}
-            className={`font-poppins font-normal font-pointer text-[16px] mr-10 text-black`}
+            className={`font-poppins font-normal cursor-pointer text-[16px] mr-10 text-black hover:text-secondary`}
           >
             <Link to={`/${nav.id}`}>{nav.title}</Link>
           </li>
         ))}
 
-        <li className={`font-poppins font-normal font-pointer text-[16px] mr-0 text-black`}>
+        <li className={`font-poppins font-normal font-pointer text-[16px] mr-0 text-black hover:text-secondary`}>
           <Link to="#!" onClick={logout}>Logout</Link>
         </li>
 
@@ -93,9 +93,9 @@ const Navbar = ({ isAuthenticated, logout }) => {
 
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
-      <a href={`${ isAuthenticated ? 'dashboard' : '/'}`}>
+      <Link to={`${ isAuthenticated ? '/dashboard' : '/'}`}>
         <img src={logo} alt="iqsensei" className="w-[140px] h-[60px]" />
-      </a>
+      </Link>
       <ul className="list-none md:flex hidden justify-end items-center flex-1">
         { isAuthenticated ? authLinks : guestLinks }
       </ul>

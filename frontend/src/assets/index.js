@@ -8,6 +8,8 @@ import mission from "./mission.png";
 import leader1 from "./leader1.jpg";
 import leader2 from "./leader2.jpg";
 import coin from "./coin.svg";
+import star from "./star.svg";
+import brain from "./brain.svg";
 
 export {
     logo,
@@ -20,4 +22,6 @@ export {
     leader1,
     leader2,
     coin,
+    star,
+    brain,
 }

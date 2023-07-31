@@ -68,3 +68,12 @@
 .feedback-card:hover {
   box-shadow: var(--card-shadow);
 }
+
+.course-card {
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease;
+}
+
+.course-card:hover {
+  transform: scale(1.1);
+}
