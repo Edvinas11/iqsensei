@@ -5,6 +5,7 @@ import Shop from "./Shop";
 import Register from "./Register";
 import Home from "./Home";
 import About from "./About";
+import CourseSummary from "./CourseSummary";
 
 export {
     Dashboard,
@@ -13,5 +14,6 @@ export {
     Shop,
     Register,
     Home,
-    About
+    About,
+    CourseSummary,
 }

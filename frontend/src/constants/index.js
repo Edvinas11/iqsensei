@@ -1,5 +1,20 @@
 import { pencil, leader1, leader2 } from "../assets";
 
+export const coursesFilterCategories = [
+  {
+    id: "all",
+    title: "All",
+  },
+  {
+    id: "price",
+    title: "Price",
+  },
+  {
+    id: "rating",
+    title: "Rating",
+  },
+]
+
 export const authNavLinks = [
   {
     id: "dashboard",

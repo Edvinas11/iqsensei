@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PrivateRoute from "./hocs/PrivateRoute";
-import { Dashboard, Courses, Login, Shop, Register, Home, About } from "./pages";
+import { Dashboard, Courses, Login, Shop, Register, Home, About, CourseSummary } from "./pages";
 import { Provider } from "react-redux";
 import store from "./store";
 import { checkAuthenticated } from "./actions/auth";
@@ -16,28 +16,32 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "dashboard",
+    path: "/dashboard",
     element: <PrivateRoute component={Dashboard}/>,
   },
   {
-    path: "courses",
+    path: "/courses",
     element: <PrivateRoute component={Courses}/>,
   },
   {
-    path: "login",
+    path: "/login",
     element: <Login />,
   },
   {
-    path: "shop",
+    path: "/shop",
     element: <PrivateRoute component={Shop}/>,
   },
   {
-    path: "register",
+    path: "/register",
     element: <Register />,
   },
   {
-    path: "aboutus",
+    path: "/aboutus",
     element: <About />,
+  },
+  {
+    path: "/course/:courseId",
+    element: <CourseSummary />,
   },
 ]);
 

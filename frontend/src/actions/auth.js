@@ -198,7 +198,7 @@ export const updateToken = () => async (dispatch) => {
       // Set the Authorization header for future API requests
       axios.defaults.headers.common[
         "Authorization"
-      ] = `Bearer ${response.data.access_token}`;
+      ] = `Bearer ${response.data.access}`;
 
       dispatch({
         type: SILENT_TOKEN_REFRESH_SUCCESS,
