@@ -58,5 +58,6 @@ class AbstractCourseSerializer(serializers.ModelSerializer):
 class CourseCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        exclude = ["author"]
+        #exclude = ["author"] # Taip buvo
+        fields = "__all__"
 

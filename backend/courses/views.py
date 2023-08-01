@@ -4,6 +4,7 @@ from rest_framework import permissions
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from .models import Course
 from api.models import AppUser
@@ -11,6 +12,7 @@ from .serializers import CourseSerializer, AbstractCourseSerializer, CourseCreat
 
 class Courses(APIView):
     permission_classes = (permissions.AllowAny,)
+    #parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request):
         serializer = CourseCreateSerializer(data=request.data)

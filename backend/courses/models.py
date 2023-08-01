@@ -1,7 +1,23 @@
 from django.db import models
 from api.models import AppUser
 from django.utils import timezone
+from datetime import timedelta
+
 import os
+
+
+
+
+# Previous not sure if works
+"""
+def upload_to(instance, filename):
+    return os.path.join("courses/images", f"course_{instance.course_id}", filename)
+"""
+# Func on tutorial
+def upload_to(instance, filename):
+    return 'courses/images/{filename}'.format(filename=filename)
+
+
 
 class Tag(models.Model):
     title = models.CharField(max_length=50)
@@ -53,38 +69,35 @@ class CourseManager(models.Manager):
 class Course(models.Model):
     course_id = models.AutoField(primary_key=True)
 
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, null=False)
 
-    short_description = models.TextField(default="")
-    description = models.TextField(default="")
+    short_description = models.TextField(null=False)
+    description = models.TextField(null=False)
 
-    mode = models.SmallIntegerField(default=0) # Mode is represented in numbers 1/2/3/...
-    duration = models.DurationField(null=True)
-    tags = models.ManyToManyField(Tag, related_name="courses")
+    mode = models.SmallIntegerField(null=False) # Mode is represented in numbers 1/2/3/...
+    duration = models.DurationField(null=False, default=timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0))
+    tags = models.ManyToManyField(Tag, related_name="courses", blank=True)
     
 
-    def course_image_upload_path(instance, filename):
-        # Construct the upload path using the course_id
-        return os.path.join("courseData/images", f"course_{instance.course_id}", filename)
-    image = models.ImageField(upload_to=course_image_upload_path, null=True)
+    image = models.ImageField(upload_to=upload_to, default='courses/images/default.jpg')
 
     
-    author = models.ForeignKey(AppUser, on_delete=models.SET_NULL, null=True, related_name='courses')
+    author = models.ForeignKey(AppUser, on_delete=models.DO_NOTHING, null=True, related_name='courses')
     contributors = models.ManyToManyField(AppUser, related_name='contributed_courses', blank=True)
 
-    rating = models.SmallIntegerField(default=0)
+    rating = models.FloatField(default=0)
     rating_count = models.IntegerField(default=0)
 
-    price = models.IntegerField()
+    price = models.IntegerField(null=False)
 
-    created_at = models.DateTimeField(default=timezone.now, editable=False, null=True)
+    created_at = models.DateTimeField(default=timezone.now, editable=False, null=False)
 
     related_courses = models.ManyToManyField('self', blank=True)
 
-    updated_at = models.DateTimeField(default=timezone.now, null=True)
+    updated_at = models.DateTimeField(default=timezone.now, null=False)
     updated_count = models.IntegerField(default=0)
 
-    REQUIRED_FIELDS = ['title', 'author', 'price', 'created_at'] # List of fields that are required when creating a course
+    REQUIRED_FIELDS = ['title', 'short_description', 'description', 'mode', 'duration', 'image', 'author', 'price', 'created_at'] # List of fields that are required when creating a course
     objects = CourseManager()
 
     def __str__(self):
