@@ -29,6 +29,7 @@ class CourseSerializer(serializers.ModelSerializer):
                 "title", 
                 "description",
                 "sections",
+                "short_description",
                 "mode",
                 "rating",
                 "rating_count",
