@@ -11,7 +11,7 @@ const Courses = ({ getAllCourses }) => {
   const [courses, setCourses] = useState([]);
   const [filter, setFilter] = useState("all");
   const [sortOrder, setSortOrder] = useState("descending");
-  const [imageSourceUrls, setImageSourceUrls] = useState("");
+  const [imageSourceUrls, setImageSourceUrls] = useState([]);
 
   // Function to handle filtering based on selected category
   const handleFilterChange = (category) => {
@@ -48,9 +48,12 @@ const Courses = ({ getAllCourses }) => {
         // Fetch images for all courses
         const imagePromises = response.map(async (course) => {
           const image = await fetchImage(course.image);
-          return URL.createObjectURL(image);
+          return {
+            course_id: course.course_id,
+            url: URL.createObjectURL(image),
+          };
         });
-        
+
         // Wait for all image promises to resolve
         const images = await Promise.all(imagePromises);
         setImageSourceUrls(images);
@@ -120,13 +123,26 @@ const Courses = ({ getAllCourses }) => {
                 No courses at the moment.
               </p>
             ) : (
-              filteredAndSortedCourses?.map((course, index) => (
-                <CourseCard
-                  key={course.course_id}
-                  {...course}
-                  image={imageSourceUrls[index]}
-                />
-              ))
+              filteredAndSortedCourses?.map((course) => {
+                // Find the corresponding image URL for the current course
+                const imageUrlObj = imageSourceUrls.find(
+                  (item) => item.course_id === course.course_id
+                );
+
+                if (!imageUrlObj) {
+                  // If image URL not found for some reason, handle it here
+                  // For example, you can show a placeholder image
+                  return <CourseCard key={course.course_id} {...course} />;
+                }
+
+                return (
+                  <CourseCard
+                    key={course.course_id}
+                    {...course}
+                    image={imageUrlObj.url}
+                  />
+                );
+              })
             )}
           </div>
         </div>

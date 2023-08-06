@@ -6,6 +6,14 @@ import { useParams } from "react-router-dom";
 import { getCourse } from "../actions/course";
 import { fetchImage } from "../actions/imageFetch";
 import { star } from "../assets";
+import { layout } from "../style";
+
+const ReviewCard = ({ message, author }) => (
+  <div className={`flex-1 flex-col p-6 rounded-[20px] box-shadow my-5`}>
+    <h4 className="font-poppins font-semibold text-black text-[18px] leading-[23px] mb-2">{author}</h4>
+    <p className={`${styles.paragraph}`}>{message}</p>
+  </div>
+);
 
 const CourseSummary = ({ getCourse }) => {
   const { courseId } = useParams();
@@ -86,9 +94,7 @@ const CourseSummary = ({ getCourse }) => {
 
       <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
-          <div
-            className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} sm:flex-row flex-col rounded-[20px] box-shadow`}
-          >
+          <div className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} sm:flex-row flex-col rounded-[20px] box-shadow`}>
             <div className="flex-1 flex md:flex-row flex-col">
               <img
                 src={imageSourceUrl}
@@ -132,12 +138,50 @@ const CourseSummary = ({ getCourse }) => {
         </div>
       </div>
 
+      {/* Course Summary Section */}
       <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
-          <h2 className={`${styles.heading2} text-black`}>Course Summary</h2>
-          <p className={`${styles.paragraph} text-left max-w-[980px] mt-5`}>{course.description}</p>
+          <div className={`${layout.section}`}>
+            <div className={`${layout.sectionInfo}`}>
+              <h2 className={`${styles.heading2} text-black`}>Summary</h2>
+              <p className={`${styles.paragraph} text-left max-w-[730px] mt-5`}>
+                {course.description}
+              </p>
+            </div>
+
+            <div className={`${layout.sectionReverse} ml-10`}>
+              <div className="flex-col p-10 rounded-[20px] box-shadow">
+                <h2 className={`${styles.heading2} text-black text-center`}>
+                  Course Sections
+                </h2>
+                <ul className="list-disc flex flex-col items-start ml-10">
+                  {course.sections.map((section) => (
+                    <li
+                      key={section.id}
+                      className={`font-poppins font-normal cursor-pointer text-[16px] my-1 text-black hover:text-secondary`}
+                    >
+                      <span>{section.title}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      {/* Course Summary Section End */}
+      {/* Course Reviews Section */}
+      <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
+        <div className={`${styles.boxWidth}`}>
+          <h2 className={`${styles.heading2} text-black`}>Reviews</h2>
+          <div className="flex flex-col items-left">
+            {course.reviews.map((reviewCard) => (
+              <ReviewCard key={reviewCard.id} {...reviewCard}/>
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* Course Reviews Section End */}
     </div>
   ) : null;
 };
