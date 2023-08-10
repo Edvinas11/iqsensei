@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import Mission from "./Mission";
 import Leaders from "./Leaders";
 import CourseCard from "./CourseCard";
+import UserProfile from "./UserProfile";
 
 export {
     Navbar,
@@ -24,4 +25,5 @@ export {
     Mission,
     Leaders,
     CourseCard,
+    UserProfile,
 }

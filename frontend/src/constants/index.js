@@ -30,6 +30,21 @@ export const authNavLinks = [
   },
 ];
 
+export const profileLinks = [
+  {
+    id: "myprofile",
+    title: "My Profile",
+  },
+  {
+    id: "settings",
+    title: "Settings",
+  },
+  {
+    id: "support",
+    title: "Support",
+  },
+]
+
 export const guestNavLinks = [
   {
     id: "login",

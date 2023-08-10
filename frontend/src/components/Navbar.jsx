@@ -5,6 +5,7 @@ import Button from "./Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../actions/auth";
+import { UserProfile } from "../components";
 
 const Navbar = ({ isAuthenticated, logout }) => {
   const [toogle, setToogle] = useState(false);
@@ -14,15 +15,15 @@ const Navbar = ({ isAuthenticated, logout }) => {
       {authNavLinks.map((nav, index) => (
         <li
           key={nav.id}
-          className={`font-poppins font-normal cursor-pointer text-[16px] mb-4 text-white`}
+          className={`font-poppins font-normal cursor-pointer text-[16px] ${index === authNavLinks.length - 1 ? "mb-0" : "mb-4"} text-white`}
         >
           <Link to={`/${nav.id}`}>{nav.title}</Link>
         </li>
       ))}
 
-      <li className={`font-poppins font-normal font-pointer text-[16px] mb-0 text-white`}>
+      {/* <li className={`font-poppins font-normal font-pointer text-[16px] mb-0 text-white`}>
         <Link to="#!" onClick={logout}>Logout</Link>
-      </li>
+      </li> */}
     </Fragment>
   );
 
@@ -78,15 +79,15 @@ const Navbar = ({ isAuthenticated, logout }) => {
       {authNavLinks.map((nav, index) => (
           <li
             key={nav.id}
-            className={`font-poppins font-normal cursor-pointer text-[16px] mr-10 text-black hover:text-secondary`}
+            className={`font-poppins font-normal cursor-pointer text-[16px] ${index === authNavLinks.length - 1 ? "mr-0" : "mr-10"} text-black hover:text-secondary`}
           >
             <Link to={`/${nav.id}`}>{nav.title}</Link>
           </li>
         ))}
 
-        <li className={`font-poppins font-normal font-pointer text-[16px] mr-0 text-black hover:text-secondary`}>
+        {/* <li className={`font-poppins font-normal font-pointer text-[16px] mr-0 text-black hover:text-secondary`}>
           <Link to="#!" onClick={logout}>Logout</Link>
-        </li>
+        </li> */}
 
     </Fragment>
   )
@@ -96,27 +97,33 @@ const Navbar = ({ isAuthenticated, logout }) => {
       <Link to={`${ isAuthenticated ? '/dashboard' : '/'}`}>
         <img src={logo} alt="iqsensei" className="w-[140px] h-[60px]" />
       </Link>
+
+      {/* Navbar section */}
       <ul className="list-none md:flex hidden justify-end items-center flex-1">
         { isAuthenticated ? authLinks : guestLinks }
       </ul>
 
+      {/* Hidden sidebar section */}
       <div className="md:hidden flex flex-1 justify-end items-center">
         <img
           src={toogle ? close : menu}
           alt="menu"
-          className="w-[28px] h-[28px] object-contain"
+          className="w-[28px] h-[28px] object-contain popup-effect cursor-pointer"
           onClick={() => setToogle((prev) => !prev)}
         />
         <div
           className={`${
             toogle ? "flex" : "hidden"
-          } p-6 bg-purple absolute top-20 right-0 mx-4 my-2 min-w[140px] rounded-xl sidebar`}
+          } p-6 bg-purple absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
         >
           <ul className="list-none flex flex-col justify-end items-center flex-1">
             {isAuthenticated ? authSidebarLinks : guestSidebarLinks}
           </ul>
         </div>
       </div>
+
+      {/* Profile section */}
+      { isAuthenticated ? (<UserProfile />) : null}
     </nav>
   );
 };

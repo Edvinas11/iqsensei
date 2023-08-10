@@ -10,6 +10,8 @@ import leader2 from "./leader2.jpg";
 import coin from "./coin.svg";
 import star from "./star.svg";
 import brain from "./brain.svg";
+import profileCircle from "./profile-circle.svg";
+import arrowDown from "./arrow-down.svg";
 
 export {
     logo,
@@ -24,4 +26,6 @@ export {
     coin,
     star,
     brain,
+    profileCircle,
+    arrowDown,
 }

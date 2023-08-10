@@ -2,7 +2,7 @@ import React from "react";
 
 const ErrorMessage = ({ text }) => {
   return (
-    <div className="flex items-center mb-4 text-sm text-red-800 rounded-lg bg-primary dark:text-red-400" role="alert">
+    <div className="flex items-center mb-4 text-sm text-red-500 rounded-lg bg-primary dark:text-red-500" role="alert">
       <svg
         className="flex-shrink-0 inline w-4 h-4 mr-3"
         aria-hidden="true"

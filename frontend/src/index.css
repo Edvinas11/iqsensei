@@ -69,11 +69,12 @@
   box-shadow: var(--card-shadow);
 }
 
-.course-card {
+.popup-effect {
   box-shadow: var(--card-shadow);
   transition: transform 0.3s ease;
 }
 
-.course-card:hover {
+.popup-effect:hover {
   transform: scale(1.1);
 }
+

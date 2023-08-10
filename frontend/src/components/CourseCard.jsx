@@ -14,20 +14,23 @@ const CourseCard = ({
   image,
 }) => {
   return (
-    <div className="flex justify-between flex-col px-5 py-5 rounded-[30px] bg-transparent max-w-[380px] mx-5 my-6 course-card">
-      <div className="flex flex-col px-8 py-8 justify-center bg-white rounded-[15px] h-[650px]">
+    <div className="flex justify-between flex-col px-5 py-5 rounded-[30px] bg-transparent max-w-[380px] mx-5 my-6 popup-effect">
+      <div className="flex flex-col p-8 justify-center bg-white rounded-[15px]">
         <Link to={`/course/${course_id}`}>
           <div>
-            <div className="rounded-[15px] overflow-hidden items-center justify-center">
+            <div className="rounded-[15px] overflow-hidden items-center justify-center mb-5">
               <img
                 src={image}
                 alt="image"
-                className="w-[100%] h-[100%] object-contain"
+                className="w-[100%] h-[100%] object-cover"
+                style={{ aspectRatio: '2/1' }}
               />
             </div>
-            <h4 className="font-poppins font-semibold text-[32px] text-black mt-3">
-              {title}
-            </h4>
+            <div className=" flex items-center h-[150px] ">
+              <h4 className="font-poppins font-semibold text-[32px] text-black overflow-hidden">
+                {title}
+              </h4>
+            </div>
             <div className="flex flex-row items-center mt-2">
               {Array.from({ length: 5 }).map((_, index) => (
                 <img

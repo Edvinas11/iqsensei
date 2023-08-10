@@ -7,6 +7,7 @@ import {
 const initialState = {
   email: "",
   username: "",
+  coins: 0,
 };
 
 export default function (state = initialState, action) {
