@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { profileCircle, arrowDown, close } from "../assets";
 import { connect } from "react-redux";
 import { profileLinks } from "../constants";
@@ -9,10 +9,40 @@ const UserProfile = ({ username, coins, logout }) => {
   const [profileName, setProfileName] = useState("");
   const [profileCoins, setProfileCoins] = useState(0);
   const [toggle, setToggle] = useState(false);
+  const [shouldClose, setShouldClose] = useState(false);
+  const dropdownRef = useRef(null);
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShouldClose(true);
+    }
+  };
+
+  useEffect(() => {
+    // Delay closing the dropdown to prevent immediate reopening
+    if (shouldClose) {
+      const timeout = setTimeout(() => {
+        setToggle(false);
+        setShouldClose(false);
+      }, 100); // Adjust the delay as needed
+      return () => clearTimeout(timeout);
+    }
+  }, [shouldClose]);
+
+  const handleToggleClick = (event) => {
+    setToggle((prev) => !prev);
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     const name = capitalizeFirstLetter(username);
@@ -22,9 +52,10 @@ const UserProfile = ({ username, coins, logout }) => {
 
   return (
     <div className="relative z-10">
+      {/* Profile button section start */}
       <div
         className="flex flex-row items-center justify-center p-2 md:ml-8 ml-5 bg-primary popup-effect cursor-pointer"
-        onClick={() => setToggle((prev) => !prev)}
+        onClick={handleToggleClick}
       >
         <img src={profileCircle} alt="profile" className="h-[20px] w-[20px]" />
         <h4 className="font-poppins font-normal text-black text-[16px] ml-2 md:flex hidden">
@@ -36,15 +67,23 @@ const UserProfile = ({ username, coins, logout }) => {
           className="h-[20px] w-[20px] md:ml-3 md:flex hidden"
         />
       </div>
+      {/* Profile button section end */}
+
+      {/* Hidden dropdown section start */}
       {toggle && (
         <div
-          className={`absolute p-6 bg-white md:mx-4 md:my-2 min-w-[180px] mt-4 rounded-xl sidebar ${
+          ref={dropdownRef}
+          className={`absolute p-6 bg-white md:mx-4 md:my-2 min-w-[180px] max-w-[180px] mt-4 rounded-xl sidebar ${
             toggle ? "left-0" : ""
           } xs:left-[-130px] md:left-auto`}
         >
           <div className="flex flex-col mb-4">
-            <span className="font-poppins font-thin text-[12px] text-gray-400">Coins</span>
-            <h4 className="font-poppins font-semibold text-black text-[18px] leading-[23px]">{profileCoins}</h4>
+            <span className="font-poppins font-thin text-[12px] text-gray-400">
+              Coins
+            </span>
+            <h4 className="font-poppins font-semibold text-black text-[18px] leading-[23px]">
+              {profileCoins}
+            </h4>
           </div>
 
           <div className="w-full flex justify-between items-center pt-6 border-t-[1px] border-t-gray-500"></div>
@@ -69,6 +108,7 @@ const UserProfile = ({ username, coins, logout }) => {
           </ul>
         </div>
       )}
+      {/* Hidden dropdown section end */}
     </div>
   );
 };
