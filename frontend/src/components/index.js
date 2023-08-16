@@ -11,6 +11,7 @@ import Mission from "./Mission";
 import Leaders from "./Leaders";
 import CourseCard from "./CourseCard";
 import UserProfile from "./UserProfile";
+import CoinsCard from "./CoinsCard";
 
 export {
     Navbar,
@@ -26,4 +27,5 @@ export {
     Leaders,
     CourseCard,
     UserProfile,
+    CoinsCard,
 }

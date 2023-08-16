@@ -8,6 +8,7 @@ const initialState = {
   email: "",
   username: "",
   coins: 0,
+  xp_points: 0,
 };
 
 export default function (state = initialState, action) {
@@ -19,6 +20,8 @@ export default function (state = initialState, action) {
         ...state,
         email: payload.profile.email,
         username: payload.profile.username,
+        coins: payload.profile.coins,
+        xp_points: payload.profile.xp_points, 
       };
     case LOAD_USER_PROFILE_FAIL:
     case LOGOUT_SUCCESS:
@@ -26,6 +29,8 @@ export default function (state = initialState, action) {
         ...state,
         email: "",
         username: "",
+        coins: 0,
+        xp_points: 0,
       };
     default:
       return state;

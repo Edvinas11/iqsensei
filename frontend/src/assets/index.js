@@ -12,6 +12,9 @@ import star from "./star.svg";
 import brain from "./brain.svg";
 import profileCircle from "./profile-circle.svg";
 import arrowDown from "./arrow-down.svg";
+import helpCircle from "./help-circle.svg";
+import settings from "./settings.svg";
+import users from "./users.svg";
 
 export {
     logo,
@@ -28,4 +31,7 @@ export {
     brain,
     profileCircle,
     arrowDown,
+    helpCircle,
+    settings,
+    users,
 }
