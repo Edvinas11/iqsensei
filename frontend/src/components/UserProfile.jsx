@@ -57,7 +57,7 @@ const UserProfile = ({ username, coins, logout }) => {
         className="flex flex-row items-center justify-center p-2 md:ml-8 ml-5 bg-primary popup-effect cursor-pointer"
         onClick={handleToggleClick}
       >
-        <img src={profileCircle} alt="profile" className="h-[20px] w-[20px]" />
+        <img src={profileCircle} alt="profile" className="h-[20px] w-[20px] object-contain" />
         <h4 className="font-poppins font-normal text-black text-[16px] ml-2 md:flex hidden">
           {profileName}
         </h4>
@@ -88,20 +88,23 @@ const UserProfile = ({ username, coins, logout }) => {
 
           <div className="w-full flex justify-between items-center pt-6 border-t-[1px] border-t-gray-500"></div>
 
-          <ul className="list-none flex flex-col justify-end items-center flex-1">
+          <ul className="list-none flex flex-col justify-start flex-1">
             {profileLinks.map((link) => (
               <li
                 key={link.id}
-                className={`font-poppins font-normal cursor-pointer text-[16px] mb-4 text-black`}
+                className={`font-poppins font-normal cursor-pointer text-[16px] mb-4 text-black hover:text-secondary`}
               >
-                <Link to={`/${link.id}`}>{link.title}</Link>
+                <div className="flex flex-row items-center">
+                  <img src={link.icon} alt="icon" className="h-[20px] w-[20px] object-contain mr-2"/>
+                  <Link to={`/${link.id}`}>{link.title}</Link>
+                </div>
               </li>
             ))}
             <div className="w-full flex justify-between items-center pt-6 border-t-[1px] border-t-gray-500"></div>
             <li
-              className={`font-poppins font-normal font-pointer text-[16px] mb-0 text-red-500`}
+              className={`font-poppins font-normal font-pointer text-[16px] mb-0 text-red-500 hover:text-red-800`}
             >
-              <Link to="#!" onClick={logout}>
+              <Link to="#!" onClick={logout} >
                 Logout
               </Link>
             </li>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../style";
-import { Navbar } from "../components";
+import { Navbar, CoinsCard } from "../components";
 import { connect } from "react-redux";
 
 const Dashboard = ({ username }) => {
@@ -30,6 +30,12 @@ const Dashboard = ({ username }) => {
               {greeting || "User"}
             </h1>
           </div>
+        </div>
+      </div>
+
+      <div className={`bg-primary ${styles.flexStart}`}>
+        <div className={`${styles.boxWidth}`}>
+          <CoinsCard />
         </div>
       </div>
     </div>

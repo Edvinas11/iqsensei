@@ -1,4 +1,4 @@
-import { pencil, leader1, leader2 } from "../assets";
+import { pencil, leader1, leader2, helpCircle, settings, users } from "../assets";
 
 export const coursesFilterCategories = [
   {
@@ -34,14 +34,17 @@ export const profileLinks = [
   {
     id: "myprofile",
     title: "My Profile",
+    icon: users,
   },
   {
     id: "settings",
     title: "Settings",
+    icon: settings,
   },
   {
     id: "support",
     title: "Support",
+    icon: helpCircle,
   },
 ]
 
