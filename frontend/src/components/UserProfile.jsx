@@ -104,7 +104,7 @@ const UserProfile = ({ username, coins, logout }) => {
             <li
               className={`font-poppins font-normal font-pointer text-[16px] mb-0 text-red-500 hover:text-red-800`}
             >
-              <Link to="#!" onClick={logout} >
+              <Link to="/#!" onClick={logout} >
                 Logout
               </Link>
             </li>

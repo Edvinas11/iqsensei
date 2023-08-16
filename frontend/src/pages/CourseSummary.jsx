@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../style";
-import { Navbar } from "../components";
+import { Navbar, Button } from "../components";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCourse } from "../actions/course";
@@ -84,10 +84,18 @@ const CourseSummary = ({ getCourse }) => {
 
       <div className={`bg-primary ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
-          <div className="flex flex-row justify-between items-center w-full p-10">
+          <div className="flex md:flex-row flex-col justify-between items-center w-full p-10">
             <h1 className="flex-1 font-poppins font-semibold text-black text-[52px] ss:leading-[100.8px] leading-[75px]">
               {course.title}
             </h1>
+            <Button
+                  type="submit"
+                  color="white"
+                  bgColor="#8c52ff"
+                  text="Enroll Now"
+                  borderRadius="10px"
+                  styles={`p-4 md:my-2 mt-10`}
+                />
           </div>
         </div>
       </div>
@@ -102,6 +110,11 @@ const CourseSummary = ({ getCourse }) => {
                 className="object-contain h-[45%] w-[45%] rounded-[15px] mr-16"
               />
               <div className="flex flex-col justify-center">
+                <div className="flex flex-row mb-3">
+                  {course.warnings.map((warning) => (
+                    <span className="bg-red-200 text-red-500 text-[14px] font-poppins font-semibold py-2 px-5 rounded-[25px]">{warning.title}</span>
+                  ))}
+                </div>
                 <h2 className={`${styles.heading2} text-black mb-3`}>
                   {course.title}
                 </h2>
