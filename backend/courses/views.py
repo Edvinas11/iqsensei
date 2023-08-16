@@ -14,8 +14,11 @@ class Courses(APIView):
     permission_classes = (permissions.AllowAny,)
     #parser_classes = [MultiPartParser, FormParser]
 
+    # Create course
     def post(self, request):
+        
         serializer = CourseCreateSerializer(data=request.data)
+
         if serializer.is_valid():
             author_id = request.data.get('author')
             try:
@@ -28,7 +31,7 @@ class Courses(APIView):
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-
+    # Get either one course by id or all courses by not specifying id
     def get(self, request, pk=None):
         if pk == None:
             queryset = Course.objects.all()
@@ -45,7 +48,7 @@ class Courses(APIView):
         return Response(serializer.data)
 
 
-    
+    # Updating specified course data by id
     def put(self, request, pk):
         course = Course.objects.get(course_id=pk)
         serializer = CourseCreateSerializer(course, data=request.data)
@@ -54,6 +57,7 @@ class Courses(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    # Deleting specified course by id
     def delete(self, request, pk):
         course = Course.objects.get(course_id=pk)
         course.delete()

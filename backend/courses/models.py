@@ -79,11 +79,17 @@ class Course(models.Model):
     tags = models.ManyToManyField(Tag, related_name="courses", blank=True)
     
 
+    # Course accessability
+    available_for_everyone = models.BooleanField(default=False)
+    available_for_any_subscriber = models.BooleanField(default=False)
+    available_for_buyers_only = models.BooleanField(default=True)
+
     image = models.ImageField(upload_to=upload_to, default='courses/images/default.jpg')
 
     
-    author = models.ForeignKey(AppUser, on_delete=models.DO_NOTHING, null=True, related_name='courses')
+    author = models.ForeignKey(AppUser, on_delete=models.DO_NOTHING, null=True, related_name='courses_created')
     contributors = models.ManyToManyField(AppUser, related_name='contributed_courses', blank=True)
+    subscribers = models.ManyToManyField(AppUser, related_name="courses_that_user_bought")
 
     rating = models.FloatField(default=0)
     rating_count = models.IntegerField(default=0)
@@ -97,11 +103,22 @@ class Course(models.Model):
     updated_at = models.DateTimeField(default=timezone.now, null=False)
     updated_count = models.IntegerField(default=0)
 
+
+
     REQUIRED_FIELDS = ['title', 'short_description', 'description', 'mode', 'duration', 'image', 'author', 'price', 'created_at'] # List of fields that are required when creating a course
     objects = CourseManager()
 
     def __str__(self):
         return self.title
+
+class CourseCategory(models.Model):
+    category_id = models.AutoField(primary_key=True)
+
+    title = models.CharField(max_length=100, null=False)
+
+    courses = models.ManyToManyField(Course, related_name='categories')
+    qualified_users = models.ManyToManyField(AppUser, related_name="qualified_categories")
+
 
 
 class Review(models.Model):
