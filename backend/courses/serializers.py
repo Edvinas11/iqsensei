@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Course, Section, Review, Warning
+from .models import Course, Section, Review, Warning, CourseCategory
 from api.serializers import UserPublicSerializer
 
 class SectionSerializer(serializers.ModelSerializer):
@@ -56,9 +56,16 @@ class AbstractCourseSerializer(serializers.ModelSerializer):
                 "image",
                 "tags")
 
+class CourseCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CourseCategory
+        fields = "category_id"
+
+
 class CourseCreateSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Course
-        #exclude = ["author"] # Taip buvo
-        fields = "__all__"
+        exclude = ["author"]
+        #fields = "__all__"
 

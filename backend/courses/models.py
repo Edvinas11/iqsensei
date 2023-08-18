@@ -89,7 +89,7 @@ class Course(models.Model):
     
     author = models.ForeignKey(AppUser, on_delete=models.DO_NOTHING, null=True, related_name='courses_created')
     contributors = models.ManyToManyField(AppUser, related_name='contributed_courses', blank=True)
-    subscribers = models.ManyToManyField(AppUser, related_name="courses_that_user_bought")
+    subscribers = models.ManyToManyField(AppUser, related_name="courses_that_user_bought", blank=True)
 
     rating = models.FloatField(default=0)
     rating_count = models.IntegerField(default=0)
@@ -107,9 +107,6 @@ class Course(models.Model):
 
     REQUIRED_FIELDS = ['title', 'short_description', 'description', 'mode', 'duration', 'image', 'author', 'price', 'created_at'] # List of fields that are required when creating a course
     objects = CourseManager()
-
-    def __str__(self):
-        return self.title
 
 class CourseCategory(models.Model):
     category_id = models.AutoField(primary_key=True)

@@ -33,6 +33,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 
     roles = models.ManyToManyField(Role, related_name="members")
 
+    course_manager = models.BooleanField(default=False)
 
     #    _Related model fields_
     #       courses_created
