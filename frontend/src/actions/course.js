@@ -12,6 +12,7 @@ export const getCourse = (courseId) => async (dispatch) => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
+    Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
     withCredentials: true,
   };
 
@@ -46,6 +47,7 @@ export const getAllCourses = () => async (dispatch) => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
+      Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
     withCredentials: true,
   };
 
