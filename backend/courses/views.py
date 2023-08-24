@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from rest_framework import authentication
 from rest_framework import permissions
 from rest_framework import status
 from rest_framework.views import APIView
@@ -14,23 +15,18 @@ from api.models import AppUser
 from .serializers import CourseSerializer, AbstractCourseSerializer, CourseCreateSerializer
 
 class Courses(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
-    
-    
-    #parser_classes = [MultiPartParser, FormParser]
+    permission_classes = [permissions.AllowAny]
+
 
     # Create course
     def post(self, request):
         print(request.data)
 
+
         serializer = CourseCreateSerializer(data=request.data)
-        course_category_ids_str_list = request.data.getlist('categories[]')
-        course_category_ids = [int(id_str) for id_str in course_category_ids_str_list]
 
         if serializer.is_valid():
             serializer.save(author=request.user)
-            serializer.instance.categories.set(course_category_ids)
             
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -39,6 +35,12 @@ class Courses(APIView):
 
     # Retrieve a single course by ID or all courses without specifying an ID
     def get(self, request, pk=None):
+        queryset = Course.objects.all()
+        serializer = AbstractCourseSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+
         # Determining user subscription status
         isSubscriber = len(Course.objects.filter(subscribers=request.user)) > 0
         

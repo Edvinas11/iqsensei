@@ -42,6 +42,7 @@ export const getCourse = (courseId) => async (dispatch) => {
 };
 
 export const getAllCourses = () => async (dispatch) => {
+  // console.log(sessionStorage.getItem("access_token"))
   const config = {
     headers: {
       Accept: "application/json",
@@ -52,7 +53,7 @@ export const getAllCourses = () => async (dispatch) => {
   };
 
   try {
-    console.log(`token is: ${sessionStorage.getItem("access_token")}`);
+    console.log(config)
     const response = await axios.get(
       `${import.meta.env.VITE_APP_API_URL}/courses`,
       config

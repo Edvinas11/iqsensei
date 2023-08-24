@@ -59,10 +59,12 @@ class AbstractCourseSerializer(serializers.ModelSerializer):
 class CourseCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseCategory
-        fields = "category_id"
+        fields = "__all__"
 
 
 class CourseCreateSerializer(serializers.ModelSerializer):
+    categories = CourseCategorySerializer(many=True)
+
 
     class Meta:
         model = Course
