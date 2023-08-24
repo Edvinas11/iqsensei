@@ -48,11 +48,6 @@ const router = createBrowserRouter([
 // Check if the user is authenticated before rendering the app
 store.dispatch(checkAuthenticated()).then(() => {
   store.dispatch(load_user());
-
-  const tokenRefreshInterval = 4 * 60 * 1000; // 4 minutes in milliseconds.
-  setInterval(() => {
-    store.dispatch(updateToken());
-  }, tokenRefreshInterval); 
 });
 
 ReactDOM.createRoot(document.getElementById("root")).render(

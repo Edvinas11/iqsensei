@@ -30,7 +30,7 @@ export default function (state = initialState, action) {
     case REGISTER_SUCCESS:
       return {
         ...state,
-        isAuthenticated: false,
+        isAuthenticated: true,
       };
     case LOGIN_SUCCESS:
       return {

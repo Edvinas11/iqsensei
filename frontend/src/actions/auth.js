@@ -14,13 +14,15 @@ import {
 import { load_user } from "./profile";
 
 export const checkAuthenticated = () => async (dispatch) => {
-  const config = {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  };
+  const token = localStorage.getItem("access_token");
+
+  if (!token) {
+    dispatch({
+      type: AUTHENTICATED_FAIL,
+      payload: false,
+    });
+    return;
+  }
 
   // Checking whether user has refresh token at all to not send unnecessary requests to the backend
   var refreshToken = localStorage.getItem("refresh_token");
@@ -32,18 +34,23 @@ export const checkAuthenticated = () => async (dispatch) => {
     return;
   }
 
-  const body = JSON.stringify({ refresh: refreshToken });
+  const config = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    }
+  };
+
+  const body = JSON.stringify({ token: token });
 
   try {
     const response = await axios.post(
-      `${import.meta.env.VITE_APP_API_URL}/api/token/refresh`,
+      `${import.meta.env.VITE_APP_API_URL}/api/token/verify`,
       body,
-      config
+      config,
     );
 
     if (response.status === 200) {
-      localStorage.setItem("access_token", response.data.access);
-
       dispatch({
         type: AUTHENTICATED_SUCCESS,
         payload: true,
