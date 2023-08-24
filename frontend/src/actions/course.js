@@ -47,11 +47,12 @@ export const getAllCourses = () => async (dispatch) => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-      Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+    Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
     withCredentials: true,
   };
 
   try {
+    console.log(`token is: ${sessionStorage.getItem("access_token")}`);
     const response = await axios.get(
       `${import.meta.env.VITE_APP_API_URL}/courses`,
       config
