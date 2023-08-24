@@ -47,9 +47,6 @@ const router = createBrowserRouter([
     path: "loading",
     element: <LoadingPage />,
   },
-
-  // for testing purposes:
-
 ]);
 
 // Check if the user is authenticated before rendering the app

@@ -30,6 +30,7 @@ const Login = ({ isAuthenticated, login }) => {
     if (!isValidEmail(email)) {
       setError("Please provide a valid email address.");
       setLoading(false);
+      shakeScreen();
       return;
     }
 
@@ -37,12 +38,22 @@ const Login = ({ isAuthenticated, login }) => {
       const success = await login(email, password);
       if (!success) {
         setError("Invalid email or password.");
+        shakeScreen();
       }
     } catch (error) {
       setError("Unable to login. Please try again later.");
+      shakeScreen();
     }
 
     setLoading(false);
+  };
+
+  const shakeScreen = () => {
+    const contentElement = document.querySelector('.content');
+    contentElement.classList.add('shake');
+    setTimeout(() => {
+      contentElement.classList.remove('shake');
+    }, 500); // Adjust the duration to match your animation duration
   };
 
   if (isAuthenticated) return <Navigate to="/dashboard" />;
@@ -56,7 +67,7 @@ const Login = ({ isAuthenticated, login }) => {
             <img src={logo} alt="iqsensei" />
           </a>
 
-          <div className="w-full flex flex-col max-w-[500px]">
+          <div className="w-full flex flex-col max-w-[500px] content">
             <div className="w-full flex flex-col mb-6">
               <h1 className="font-poppins font-semibold text-[52px] text-black ss:leading-[100.8px] leading-[75px] w-full mb-2">
                 Login
