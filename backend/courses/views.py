@@ -35,6 +35,7 @@ class Courses(APIView):
 
     # Retrieve a single course by ID or all courses without specifying an ID
     def get(self, request, pk=None):
+        print(request.user)
         queryset = Course.objects.all()
         serializer = AbstractCourseSerializer(queryset, many=True)
         return Response(serializer.data)
