@@ -6,13 +6,13 @@ export const load_user = () => async (dispatch) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`,
     },
     withCredentials: true,
   };
 
   // Checking whether user has access token at all to not send unnecessary requests to the backend
-  var refreshToken = sessionStorage.getItem("access_token");
+  var refreshToken = localStorage.getItem("access_token");
   if (refreshToken == null) {
     dispatch({
       type: LOAD_USER_PROFILE_FAIL,

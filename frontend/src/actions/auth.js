@@ -23,7 +23,7 @@ export const checkAuthenticated = () => async (dispatch) => {
   };
 
   // Checking whether user has refresh token at all to not send unnecessary requests to the backend
-  var refreshToken = sessionStorage.getItem("refresh_token");
+  var refreshToken = localStorage.getItem("refresh_token");
   if (refreshToken == null) {
     dispatch({
       type: AUTHENTICATED_FAIL,
@@ -42,7 +42,7 @@ export const checkAuthenticated = () => async (dispatch) => {
     );
 
     if (response.status === 200) {
-      sessionStorage.setItem("access_token", response.data.access);
+      localStorage.setItem("access_token", response.data.access);
 
       dispatch({
         type: AUTHENTICATED_SUCCESS,
@@ -112,8 +112,8 @@ export const login = (email, password) => async (dispatch) => {
     );
 
     if (response.status === 200) {
-      sessionStorage.setItem("access_token", response.data.access_token);
-      sessionStorage.setItem("refresh_token", response.data.refresh_token);
+      localStorage.setItem("access_token", response.data.access_token);
+      localStorage.setItem("refresh_token", response.data.refresh_token);
 
       // Set the Authorization header for future API requests
       axios.defaults.headers.common[
@@ -142,13 +142,13 @@ export const logout = () => async (dispatch) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`,
     },
     withCredentials: true,
   };
 
   const body = JSON.stringify({
-    refresh_token: sessionStorage.getItem("refresh_token"),
+    refresh_token: localStorage.getItem("refresh_token"),
   });
 
   try {
@@ -158,8 +158,8 @@ export const logout = () => async (dispatch) => {
       config
     );
     if (response.status === 205) {
-      sessionStorage.removeItem("access_token");
-      sessionStorage.removeItem("refresh_token");
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
 
       dispatch({
         type: LOGOUT_SUCCESS,
@@ -182,7 +182,7 @@ export const updateToken = () => async (dispatch) => {
   };
 
   const body = JSON.stringify({
-    refresh: sessionStorage.getItem("refresh_token"),
+    refresh: localStorage.getItem("refresh_token"),
   });
 
   try {
@@ -193,7 +193,7 @@ export const updateToken = () => async (dispatch) => {
     );
 
     if (response.status === 200) {
-      sessionStorage.setItem("access_token", response.data.access);
+      localStorage.setItem("access_token", response.data.access);
 
       // Set the Authorization header for future API requests
       axios.defaults.headers.common[

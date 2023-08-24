@@ -12,7 +12,7 @@ export const getCourse = (courseId) => async (dispatch) => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
     withCredentials: true,
   };
 
@@ -48,12 +48,12 @@ export const getAllCourses = () => async (dispatch) => {
       "Accept": "application/json",
       "Content-Type": "application/json",
     },
-    Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
     withCredentials: true,
   };
 
   try {
-    console.log(sessionStorage.getItem("access_token"))
+    console.log(localStorage.getItem("access_token"))
     console.log(config)
     const response = await axios.get(
       `${import.meta.env.VITE_APP_API_URL}/courses`,

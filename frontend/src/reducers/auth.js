@@ -38,8 +38,8 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
       };
     case LOGOUT_SUCCESS:
-      sessionStorage.removeItem("access_token");
-      sessionStorage.removeItem("refresh_token");
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
       return {
         ...state,
         isAuthenticated: false
