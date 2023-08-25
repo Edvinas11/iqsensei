@@ -37,8 +37,8 @@ export const checkAuthenticated = () => async (dispatch) => {
   const config = {
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   };
 
   const body = JSON.stringify({ token: token });
@@ -47,7 +47,7 @@ export const checkAuthenticated = () => async (dispatch) => {
     const response = await axios.post(
       `${import.meta.env.VITE_APP_API_URL}/api/token/verify`,
       body,
-      config,
+      config
     );
 
     if (response.status === 200) {
