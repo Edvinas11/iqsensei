@@ -1,6 +1,6 @@
 import { authNavLinks, guestNavLinks } from "../constants";
 import { logo, menu, close } from "../assets";
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useRef } from "react";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -8,7 +8,9 @@ import { logout } from "../actions/auth";
 import { UserProfile } from "../components";
 
 const Navbar = ({ isAuthenticated, logout }) => {
-  const [toogle, setToogle] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [shouldClose, setShouldClose] = useState(false);
+  const dropdownRef = useRef(null);
 
   const authSidebarLinks = (
     <Fragment>
@@ -92,6 +94,34 @@ const Navbar = ({ isAuthenticated, logout }) => {
     </Fragment>
   )
 
+  const handleToggleClick = (event) => {
+    setToggle((prev) => !prev);
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShouldClose(true);
+    }
+  };
+
+  useEffect(() => {
+    // Delay closing the dropdown to prevent immediate reopening
+    if (shouldClose) {
+      const timeout = setTimeout(() => {
+        setToggle(false);
+        setShouldClose(false);
+      }, 100); // Adjust the delay as needed
+      return () => clearTimeout(timeout);
+    }
+  }, [shouldClose]);
+
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
       <Link to={`${ isAuthenticated ? '/dashboard' : '/'}`}>
@@ -106,15 +136,14 @@ const Navbar = ({ isAuthenticated, logout }) => {
       {/* Hidden sidebar section */}
       <div className="md:hidden flex flex-1 justify-end items-center">
         <img
-          src={toogle ? close : menu}
+          src={toggle ? close : menu}
           alt="menu"
           className="w-[28px] h-[28px] object-contain popup-effect cursor-pointer"
-          onClick={() => setToogle((prev) => !prev)}
+          onClick={handleToggleClick}
         />
         <div
-          className={`${
-            toogle ? "flex" : "hidden"
-          } p-6 bg-purple absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
+          className={`${toggle ? "flex" : "hidden"} p-6 bg-purple absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
+          ref={dropdownRef}
         >
           <ul className="list-none flex flex-col justify-end items-center flex-1">
             {isAuthenticated ? authSidebarLinks : guestSidebarLinks}
