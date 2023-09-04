@@ -7,6 +7,7 @@ import Home from "./Home";
 import About from "./About";
 import CourseSummary from "./CourseSummary";
 import LoadingPage from "./LoadingPage";
+import Settings from "./Settings";
 
 export {
     Dashboard,
@@ -18,4 +19,5 @@ export {
     About,
     CourseSummary,
     LoadingPage,
+    Settings,
 }

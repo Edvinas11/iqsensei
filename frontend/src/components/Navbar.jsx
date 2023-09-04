@@ -57,7 +57,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
       {guestNavLinks.map((nav, index) => (
           <li
             key={nav.id}
-            className={`font-poppins font-normal cursor-pointer text-[16px] mr-10 text-black hover:text-secondary`}
+            className={`font-poppins font-normal cursor-pointer text-[16px] mr-10 text-black dark:text-white hover:text-secondary`}
           >
             <Link to={`/${nav.id}`}>{nav.title}</Link>
           </li>
@@ -81,7 +81,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
       {authNavLinks.map((nav, index) => (
           <li
             key={nav.id}
-            className={`font-poppins font-normal cursor-pointer text-[16px] ${index === authNavLinks.length - 1 ? "mr-0" : "mr-10"} text-black hover:text-secondary`}
+            className={`font-poppins font-normal cursor-pointer text-[16px] ${index === authNavLinks.length - 1 ? "mr-0" : "mr-10"} text-black dark:text-white hover:text-secondary`}
           >
             <Link to={`/${nav.id}`}>{nav.title}</Link>
           </li>
