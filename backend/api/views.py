@@ -12,8 +12,9 @@ class UserRegister(APIView):
 
     def post(self, request):
         clean_data = custom_validation(request.data)
+        print(clean_data)
         serializer = UserRegisterSerializer(data=clean_data)
-        if serializer.is_valid(raise_exception=True):
+        if serializer.is_valid():
             user = serializer.create(clean_data)
 
             # Generate new access token
@@ -23,7 +24,9 @@ class UserRegister(APIView):
 	
             if user:
                 return Response({"access_token": access_token, "refresh_token": refresh_token}, status=status.HTTP_201_CREATED)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        else:
+            print(serializer.errors)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserLogin(APIView):
@@ -35,7 +38,7 @@ class UserLogin(APIView):
         assert validate_email(data)
         assert validate_password(data)
         serializer = UserLoginSerializer(data=data)
-        if serializer.is_valid(raise_exception=True):
+        if serializer.is_valid():
             user = serializer.check_user(data)
             login(request, user)
 

@@ -5,15 +5,9 @@ from datetime import timedelta
 
 import os
 
+from courses import config
 
 
-
-# Previous not sure if works
-"""
-def upload_to(instance, filename):
-    return os.path.join("courses/images", f"course_{instance.course_id}", filename)
-"""
-# Func on tutorial
 def upload_to(instance, filename):
     return 'courses/images/{filename}'.format(filename=filename)
 
@@ -69,49 +63,63 @@ class CourseManager(models.Manager):
 class Course(models.Model):
     course_id = models.AutoField(primary_key=True)
 
-    title = models.CharField(max_length=100, null=False)
+    title = models.CharField(max_length=100, blank=True, null=False)
 
-    short_description = models.TextField(null=False)
-    description = models.TextField(null=False)
+    short_description = models.TextField(max_length=50, blank=True, null=False)
+    description = models.TextField(max_length=3000, blank=True, null=False)
 
-    mode = models.SmallIntegerField(null=False) # Mode is represented in numbers 1/2/3/...
-    duration = models.DurationField(null=False, default=timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0))
-    tags = models.ManyToManyField(Tag, related_name="courses", blank=True)
-    
+    mode = models.SmallIntegerField(default=1, null=True) # Mode is represented in numbers 1/2/3/...
+    duration = models.DurationField(null=True)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     # Course accessability
-    available_for_everyone = models.BooleanField(default=False)
+    available_for_everyone = models.BooleanField(default=True)
     available_for_any_subscriber = models.BooleanField(default=False)
-    available_for_buyers_only = models.BooleanField(default=True)
+    available_for_buyers_only = models.BooleanField(default=False)
 
-    image = models.ImageField(upload_to=upload_to, default='courses/images/default.jpg')
+    image = models.ImageField(upload_to=upload_to, null=True, blank=False)
 
     
-    author = models.ForeignKey(AppUser, on_delete=models.DO_NOTHING, null=True, related_name='courses_created')
+    author = models.ForeignKey(AppUser, on_delete=models.SET_NULL, null=True, related_name='created_courses')
     contributors = models.ManyToManyField(AppUser, related_name='contributed_courses', blank=True)
-    subscribers = models.ManyToManyField(AppUser, related_name="courses_that_user_bought", blank=True)
+    subscribers = models.ManyToManyField(AppUser, related_name='subscribed_courses', blank=True)
 
     rating = models.FloatField(default=0)
     rating_count = models.IntegerField(default=0)
 
-    price = models.IntegerField(null=False)
+    price = models.IntegerField(null=True)
 
-    created_at = models.DateTimeField(default=timezone.now, editable=False, null=False)
+    created_at = models.DateTimeField(default=timezone.now, editable=False)
 
-    related_courses = models.ManyToManyField('self', blank=True)
+    related_courses = models.ManyToManyField("self", blank=True)
 
-    updated_at = models.DateTimeField(default=timezone.now, null=False)
+    updated_at = models.DateTimeField(default=timezone.now)
     updated_count = models.IntegerField(default=0)
 
 
+    # def save(self, *args, **kwargs):
+    #     if not self.short_description:
+    #         self.short_description = config.auto_short_decription(self.title)
+    #     if not self.description:
+    #         self.description = config.auto_summary(self.title)
+        
+    #     super().save(*args, **kwargs)
 
-    REQUIRED_FIELDS = ['title', 'short_description', 'description', 'mode', 'duration', 'image', 'author', 'price', 'created_at'] # List of fields that are required when creating a course
+    def update(self, *args, **kwargs):
+        self.updated_count += 1
+        self.updated_at = timezone.now
+
+        super().update(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
     objects = CourseManager()
 
 class CourseCategory(models.Model):
     category_id = models.AutoField(primary_key=True)
 
-    title = models.CharField(max_length=100, null=False)
+    title = models.CharField(max_length=100, )
 
     courses = models.ManyToManyField(Course, related_name='categories')
     qualified_users = models.ManyToManyField(AppUser, related_name="qualified_categories")

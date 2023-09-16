@@ -28,4 +28,4 @@ class UserLoginSerializer(serializers.Serializer):
 class UserPublicSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        exclude = ['password', 'is_superuser', 'groups', 'user_permissions', 'user_id', 'email']
+        fields = ['username']
