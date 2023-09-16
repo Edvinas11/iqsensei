@@ -23,6 +23,8 @@ const LoadingPage = () => {
             />
           </svg>
         </div>
+
+        <p className="font-poppins text-[16px] font-normal mt-10">Loading awesomeness. Just a moment, please.</p>
       </div>
     </div>
   );
