@@ -8,13 +8,15 @@ module.exports = {
       colors: {
         primary: "#F7FBFB",
         secondary: "#8c52ff",
+        "dark-primary": "#F7F7F7",
+        "dark-secondary": "#bb86fc",
         transparent: "transparent",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
       backgroundColor: {
-        "dark-primary": "#20232A",
+        "dark-primary": "#121212",
       }
     },
     screens: {

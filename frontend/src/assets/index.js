@@ -15,6 +15,9 @@ import arrowDown from "./arrow-down.svg";
 import helpCircle from "./help-circle.svg";
 import settings from "./settings.svg";
 import users from "./users.svg";
+import darkMoon from "./dark-moon.svg";
+import lightSun from "./light-sun.svg";
+import darkLogo from "./dark-logo.svg";
 
 export {
     logo,
@@ -34,4 +37,7 @@ export {
     helpCircle,
     settings,
     users,
+    darkMoon,   
+    lightSun, 
+    darkLogo,
 }

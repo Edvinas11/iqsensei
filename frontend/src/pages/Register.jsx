@@ -67,17 +67,17 @@ const Register = ({ isAuthenticated, register }) => {
     <div className={`w-full min-h-full flex items-start`}>
       <div className="relative w-[100%] h-full flex flex-col md:w-1/2">
         {/* First half */}
-        <div className="w-[100%] h-screen bg-primary flex flex-col p-20 justify-between items-center">
+        <div className="w-[100%] h-screen bg-primary dark:bg-dark-primary flex flex-col p-20 justify-between items-center">
           <a href="/" className="w-[140px] h-[60px] mr-auto">
             <img src={logo} alt="iqsensei" />
           </a>
 
           <div className="w-full flex flex-col max-w-[500px]">
             <div className="w-full flex flex-col mb-5">
-              <h1 className="font-poppins font-semibold text-[52px] text-black ss:leading-[100.8px] leading-[75px] w-full mb-2">
+              <h1 className="font-poppins font-semibold text-[52px] text-black dark:text-white ss:leading-[100.8px] leading-[75px] w-full mb-2">
                 User Registration
               </h1>
-              <p className={`${styles.paragraph} text-base mb-2`}>
+              <p className={`${styles.paragraph} text-black dark:text-white text-base mb-2`}>
                 Create an account.
               </p>
             </div>
@@ -85,7 +85,7 @@ const Register = ({ isAuthenticated, register }) => {
             <form onSubmit={(e) => onSubmit(e)}>
               <div className="w-full flex flex-col mb-10">
                 <input
-                  className="w-full font-poppins text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
+                  className="w-full font-poppins text-black dark:text-white border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
                   type="text"
                   placeholder="Username"
                   onChange={(e) => onChange(e)}
@@ -95,7 +95,7 @@ const Register = ({ isAuthenticated, register }) => {
                   autoComplete="off"
                 />
                 <input
-                  className="w-full font-poppins text-black border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
+                  className="w-full font-poppins text-black dark:text-white border-gray-200 border-b py-4 my-2 bg-transparent outline-none focus:border-gray-400"
                   type="email"
                   placeholder="Email"
                   onChange={(e) => onChange(e)}
@@ -136,7 +136,6 @@ const Register = ({ isAuthenticated, register }) => {
                 <Button
                   type="submit"
                   color="white"
-                  bgColor="#8c52ff"
                   text={
                     loading ? (
                       <div role="status">
@@ -162,7 +161,7 @@ const Register = ({ isAuthenticated, register }) => {
                     )
                   }
                   borderRadius="10px"
-                  styles={`p-4 my-2`}
+                  styles={`p-4 my-2 bg-secondary dark:bg-dark-secondary`}
                   disabled={loading}
                 />
               </div>
@@ -170,7 +169,7 @@ const Register = ({ isAuthenticated, register }) => {
           </div>
 
           <div className="w-full flex items-center justify-center">
-            <p className="font-poppins first-line:text-sm font-normal text-black">
+            <p className="font-poppins first-line:text-sm font-normal text-black dark:text-white">
               Already have an account?{" "}
               <Link
                 to="/login"
@@ -183,7 +182,7 @@ const Register = ({ isAuthenticated, register }) => {
         </div>
       </div>
       {/* Second half */}
-      <div className="bg-purple w-1/2 h-screen object-cover md:flex hidden">
+      <div className="bg-purple dark:bg-dark-secondary w-1/2 h-screen object-cover md:flex hidden">
         <div className="absolute top-[25%] right-[10%] left-[60%] flex flex-col">
           <h1 className="font-poppins font-semibold ss:text-[52px] text-[32px] ss:leading-[100.8px] leading-[75px] w-full text-white my-4">
             Join Us and Unlock a World of Possibilities.

@@ -13,7 +13,7 @@ const Footer = () => {
             alt="iqsensei"
             className="w-[200px] h-[120px] object-contain"
           />
-          <p className={`${styles.paragraph} mt-1 max-w-[312px]`}>
+          <p className={`${styles.paragraph} text-black dark:text-dark-primary mt-1 max-w-[312px]`}>
             From Zero To Hero.
           </p>
         </div>
@@ -24,14 +24,14 @@ const Footer = () => {
               key={footerLink.title}
               className={`flex flex-col ss:my-0 my-4 min-w-[150px]`}
             >
-              <h4 className="font-poppins font-medium text-[18px] leading-[27px] text-black">
+              <h4 className="font-poppins font-medium text-[18px] leading-[27px] text-black dark:text-dark-primary">
                 {footerLink.title}
               </h4>
               <ul className="list-none mt-4">
                 {footerLink.links.map((link, index) => (
                   <li
                     key={link.name}
-                    className={`font-poppins font-normal text-[16px] leading-[24px] text-black hover:text-secondary cursor-pointer
+                    className={`font-poppins font-normal text-[16px] leading-[24px] text-black hover:text-secondary dark:hover:text-secondary dark:text-dark-primary cursor-pointer
                     ${index !== footerLink.links.length - 1 ? "mb-4" : "mb-0"}`}
                   >
                     {link.name}
@@ -44,7 +44,7 @@ const Footer = () => {
       </div>
 
       <div className="w-full flex justify-between items-center md:flex-row flex-col pt-6 border-t-[1px] border-t-[#5e5e61]">
-        <p className="font-poppins font-normal text-center text-[18px] leading-[27px] text-black">
+        <p className="font-poppins font-normal text-center text-[18px] leading-[27px] text-black dark:text-dark-primary">
           Copyright Ⓒ 2023 iqsensei. All Rights Reserved.
         </p>
       </div>

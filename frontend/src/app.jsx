@@ -17,7 +17,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { checkAuthenticated } from "./actions/auth";
 import { load_user } from "./actions/profile";
-import { useStateContext } from "./contexts/ContextProvider";
+import { useStateContext } from "./contexts/contextProvider";
 
 const router = createBrowserRouter([
   {
@@ -68,12 +68,12 @@ store.dispatch(checkAuthenticated()).then(() => {
 });
 
 const App = () => {
-  const { currentMode, setCurrentMode } = useStateContext();
+  const { currentMode, setMode } = useStateContext();
 
   useEffect(() => {
     const currentThemeMode = localStorage.getItem("themeMode");
     if (currentThemeMode) {
-      setCurrentMode(currentThemeMode);
+      setMode(currentThemeMode);
     }
   }, []);
 

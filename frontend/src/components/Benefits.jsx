@@ -11,8 +11,8 @@ const BenefitCard = ({ title, icon, content, index }) => (
         <img src={icon} alt="icon" className="w-[70%] h-[70%] object-contain"/>
       </div>
       <div className='flex-1 flex flex-col ml-3'>
-        <h4 className="font-poppins font-semibold text-black dark:text-white text-[18px] leading-[23px] mb-2">{title}</h4>
-        <p className={`font-poppins ${styles.paragraph} dark:text-white font-normal text-black leading-[24px]`}>{content}</p>
+        <h4 className="font-poppins font-semibold text-black dark:text-dark-primary text-[18px] leading-[23px] mb-2">{title}</h4>
+        <p className={`font-poppins ${styles.paragraph} dark:text-dark-primary font-normal text-black leading-[24px]`}>{content}</p>
       </div>
     </div>
   </div>

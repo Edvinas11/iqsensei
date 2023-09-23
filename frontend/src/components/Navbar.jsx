@@ -1,16 +1,18 @@
 import { authNavLinks, guestNavLinks } from "../constants";
-import { logo, menu, close } from "../assets";
+import { logo, menu, close, darkLogo } from "../assets";
 import React, { useState, useEffect, Fragment, useRef } from "react";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../actions/auth";
 import { UserProfile } from "../components";
+import { useStateContext } from "../contexts/contextProvider";
 
 const Navbar = ({ isAuthenticated, logout }) => {
   const [toggle, setToggle] = useState(false);
   const [shouldClose, setShouldClose] = useState(false);
   const dropdownRef = useRef(null);
+  const { currentMode, setMode } = useStateContext();
 
   const authSidebarLinks = (
     <Fragment>
@@ -67,10 +69,9 @@ const Navbar = ({ isAuthenticated, logout }) => {
           <Button
             type="submit"
             color="white"
-            bgColor="#8c52ff"
             text="Sign Up"
             borderRadius="10px"
-            styles={`md:flex hidden px-5`}
+            styles={`md:flex hidden px-5 bg-secondary dark:bg-dark-secondary`}
           />
         </form>
     </Fragment>
@@ -125,7 +126,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
       <Link to={`${ isAuthenticated ? '/dashboard' : '/'}`}>
-        <img src={logo} alt="iqsensei" className="w-[140px] h-[60px]" />
+        <img src={currentMode === 'Dark' ? darkLogo : logo} alt="iqsensei" className="w-[140px] h-[60px]" />
       </Link>
 
       {/* Navbar section */}
