@@ -14,7 +14,7 @@ const Courses = ({ getAllCourses }) => {
   const [sortOrder, setSortOrder] = useState("descending");
   const [imageSourceUrls, setImageSourceUrls] = useState([]);
   const [notFound, setNotFound] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // Function to handle filtering based on selected category
   const handleFilterChange = (category) => {
@@ -51,6 +51,7 @@ const Courses = ({ getAllCourses }) => {
         if(response === null){
           setNotFound(true);
         } else {
+          setLoading(false);
           setCourses(response);
 
           // Fetch images for all courses
@@ -66,7 +67,7 @@ const Courses = ({ getAllCourses }) => {
           const images = await Promise.all(imagePromises);
           setImageSourceUrls(images);
 
-          setLoading(false);
+          
         }
       } catch (error) {
         console.error("Error fetching courses:", error);
