@@ -31,7 +31,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     coins = models.IntegerField(default=0)
     xp_points = models.IntegerField(default=0)
 
-    roles = models.ManyToManyField(Role, related_name="members")
+    roles = models.ManyToManyField(Role, related_name="members", blank=True)
 
     course_manager = models.BooleanField(default=False)
 
